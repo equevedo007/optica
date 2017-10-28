@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/Master.xhtml"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<ui:define name="contenido">
+
+		<h:form>
+			<p:panel id="panelProveedor" header="Registrar Proveedor">
+
+				<p:panelGrid columns="4" cellpadding="5">
+
+					<p:outputLabel value="Razón Social" />
+					<p:inputText value="#{ProveedorManaged.objProveedor.razon_Social}" style="width:280px" />
+
+					<p:outputLabel value="Nombre Comercial" />
+					<p:inputText
+						value="#{ProveedorManaged.objProveedor.nombre_Comercial}" style="width:280px" />
+
+					<p:outputLabel value="RUC" />
+					<p:inputText value="#{ProveedorManaged.objProveedor.ruc}" />
+
+					<p:outputLabel value="Primer Teléfono" />
+					<p:inputText value="#{ProveedorManaged.objProveedor.telefono01}" />
+					
+					<p:outputLabel value="Segundo Teléfono" />
+					<p:inputText value="#{ProveedorManaged.objProveedor.telefono02}" />
+
+					<p:outputLabel value="Primer Celular" />
+					<p:inputText value="#{ProveedorManaged.objProveedor.celular01}" />
+					
+					<p:outputLabel value="Segundo Celular" />
+					<p:inputText value="#{ProveedorManaged.objProveedor.celular02}" />
+
+					<p:outputLabel value="Correo" />
+					<p:inputText value="#{ProveedorManaged.objProveedor.email}" />
+
+
+
+
+
+				</p:panelGrid>
+
+			</p:panel>
+			<p:panel id="PanelDireccionProveedor" header="Dirección de Cliente">
+			
+			<p:panelGrid  columns="2" cellpadding="5">			
+			
+					<p:outputLabel for="Departamento" value="Departamento" style="width:360px"  />					
+					<p:selectOneMenu id="Departamento" value="#{ProveedorManaged.objDepartamento}" label="Departamento"
+						style="width:260px" >
+						<f:selectItem itemLabel="-Seleccione-" itemValue="" />
+						<f:selectItems value="#{ProveedorManaged.selectItemOneDepartamento}" />
+						<p:ajax  update="Provincia" />
+					</p:selectOneMenu>
+					
+					<p:outputLabel for="Provincia" value="Provincia"  />
+					
+					<p:selectOneMenu id="Provincia"
+						value="#{ProveedorManaged.objProvincia}" style="width:260px"   label="Provincia">
+						<f:selectItem itemLabel="-Seleccione-" itemValue="" />
+						<f:selectItems value="#{ProveedorManaged.selectItemOneProvincia}" />
+						<p:ajax update="Distrito"/>
+					</p:selectOneMenu>
+					
+					
+					<p:outputLabel for="Distrito" value="Distrito" />
+					
+					<p:selectOneMenu id="Distrito" value="#{ProveedorManaged.idUbigeo}"  label="Distrito"
+						style="width:260px">
+						<f:selectItem itemLabel="-Seleccione-" itemValue="" />
+						<f:selectItems value="#{ProveedorManaged.selectItemOneDistrito}" />
+						<p:ajax update="Distrito" />
+					</p:selectOneMenu>
+					</p:panelGrid>
+					<p:panelGrid columns="2">
+
+					<p:outputLabel for="Direccion" value="Dirección" />
+					<p:inputText id="Direccion" value="#{ProveedorManaged.objProveedor.direccion}"  label="Dirección"
+						style="width:360px" />
+
+					<p:outputLabel value="Referencia" />
+					<p:inputText value="#{ProveedorManaged.objProveedor.referencia}"
+						style="width:360px" />
+				</p:panelGrid>
+				
+						
+		<p:commandButton value="Registrar" action="#{ProveedorManaged.RegistarProveedor}" update="panelProveedor,PanelDireccionProveedor"/>
+		
+	</p:panel>
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

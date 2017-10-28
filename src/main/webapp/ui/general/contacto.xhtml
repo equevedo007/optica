@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: Edinson Quevedo
+  Date: 01/01/16
+  Time: 17:40
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<f:view contentType="text/html">
+	<h:head>
+	<link type="text/css" rel="stylesheet"
+			href="#{request.contextPath}/css/default.css" />
+
+		<link type="text/css" rel="stylesheet"
+			href="#{request.contextPath}/css/syntaxhighlighter/syntaxhighlighter.css" />
+		<f:facet name="first">
+			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+
+			<meta http-equiv="Pragma" content="No-cache" />
+			<meta http-equiv="Cache-Control"
+				content="no-store,No-cache,must-revalidate,post-check=0,pre-check=0,max-age=0" />
+			<meta http-equiv="Expires" content="-1" />
+			<title>Corporosoft</title>
+		</f:facet>
+		<link href="#{request.contextPath}/util/css/estilos.css"
+			rel="stylesheet" type="text/css" />
+		<link href="#{request.contextPath}/util/images/icon/logo_sat.ico"
+			type="image/x-icon" rel="shortcut icon" />
+
+		<script>
+			<!--
+			var nav = navigator.appName.toLowerCase();
+			var name = navigator.userAgent.toLowerCase();
+			
+			if(nav.indexOf("netscape")>=0){
+				if(navigator.userAgent.toLowerCase().indexOf("chrome")>=0){
+					var _width=0-100;
+				}else if(navigator.userAgent.toLowerCase().indexOf("firefox")>=0){
+					var _width =  screen.width;
+						window.onresize = function(event) {
+						  _width =  (window.innerWidth || document.body.clientWidth);
+						}
+				}
+			}else if(nav.indexOf("explorer")>=0){
+					var _width=0-100;
+			}else{
+				alert("navegador no soportado.");
+			}
+			//-->
+			//var _width = $(window).innerWidth();
+		</script>
+		
+	</h:head>
+
+	<h:body>
+		<p:layout fullPage="true">
+			<p:layoutUnit position="north" size="90" resizable="false"
+				closable="false" collapsible="false">
+				<h:panelGrid columns="3" border="0"
+					columnClasses="alignMiddle,alignMiddle,alignBottom"
+					style="background:url(#{request.contextPath}/util/images/principal/fondo-azul.jpg); 
+				 height:100%; 
+				 width:100%;">
+					
+					
+					<p:column>
+			<p:graphicImage value="/util/images/principal/logo_tu_optica.jpg"
+				width="150px" style="float:center;width:280px" />
+		</p:column>
+
+				</h:panelGrid>
+			</p:layoutUnit>
+
+			<p:layoutUnit position="center" style="text-align: center;">
+			<p:graphicImage value="/util/images/principal/Contanto.png"
+				width="250px" style="float:center;width:480px" />
+				<h:form id="frmContracto">
+				<p:growl id="growl" showDetail="true" sticky="true" />
+					<p:focus context="pngContacto" />
+					
+					
+						<h:panelGrid id="pngContacto" columns="2" border="0"
+						columnClasses="alingLeftLg,alignCenterLg,alingRightLg"
+						style="width: 100%; margin-top:100px">
+
+						<h:outputLabel value="Ingrese Licencia :"  />
+						<p:inputText value="#{ingresarLicenciaManaged.licencia}" style="width:260px" maxlength="29" required="true" label="Licencia" 
+						disabled="#{ingresarLicenciaManaged.habilitar}">						
+						</p:inputText>						
+
+						
+					
+					</h:panelGrid>
+					
+
+					<h:panelGrid columns="2"
+						columnClasses="alingLeftLg,alignCenterLg,alingRightLg" border="0"
+						style="width: 100%;" id="idBtns">
+						<p:column>
+						
+						<p:commandButton id="btnRegresarLogin" value="Regresar a Login"
+								ajax="false" action="login"
+								icon="ui-icon-newwin" update=":frmContracto" rendered="true" disabled="#{ingresarLicenciaManaged.habilitarLink}" />
+							<p:commandButton id="btnAceptar" value="Aceptar"
+								ajax="false" action="#{ingresarLicenciaManaged.ingresarLicencia}"
+								icon="ui-icon-newwin" update=":frmContracto,:growl" rendered="true" disabled="#{ingresarLicenciaManaged.habilitar}"/>
+								
+								
+								
+						</p:column>
+						<p:column>
+
+						</p:column>
+					</h:panelGrid>
+				</h:form>
+			</p:layoutUnit>
+
+			<p:layoutUnit position="south" size="50" resizable="false"
+				closable="false" collapsible="false"
+				style="text-align: center;vertical-align: middle;">
+				<h:panelGrid columns="3" border="0"
+					columnClasses="alignMiddle,alignMiddle,alignBottom"
+					style="background:url(#{request.contextPath}/util/images/principal/fondo-azul.jpg); 
+				 height:100%; 
+				 width:100%;">
+					
+				</h:panelGrid>
+			</p:layoutUnit>
+		</p:layout>
+
+	</h:body>
+</f:view>
+</html>

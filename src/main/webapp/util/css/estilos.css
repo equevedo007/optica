@@ -1,0 +1,175 @@
+@CHARSET "UTF-8";
+
+body {font-size:100%;}
+label {font-size: 100%;}
+table {font-size: 100%;}
+
+.alignBottom {vertical-align: bottom; text-align: right; width:30%}
+.alignMiddle{vertical-align: middle; text-align: center;}
+.alingRight{vertical-align: middle; text-align: right;}
+.alingLeft{vertical-align: middle; text-align: left;}
+
+
+
+.alingLeftLg{text-align: right; width:45%}
+.alignCenterLg{text-align: left; width:30%}
+.alingRightLg{text-align: left; width:25%}
+
+.alingLeftLgBtn{text-align: right; width:50%}
+.alingRightLgBtn{text-align: left; width:50%}
+
+.ui-icon-add{   
+    width: 20px;   
+    height: 20px;  
+	background: url('../images/icon/add.png') no-repeat top !important;
+	background-position: 0 0 !important;
+}
+
+.ui-icon-add-user{ 
+	width: 20px;   
+    height: 20px;    
+    background: url('../images/icon/add-user.png') no-repeat top !important;
+	background-position: 0 0 !important;
+}
+
+.ui-icon-delete-file{   
+	width: 20px;   
+    height: 20px;  
+    background: url('../images/icon/file_delete.png') no-repeat top !important;
+	background-position: 0 0 !important;
+}
+
+.ui-datatable-odd {
+    background: none repeat scroll 0 0 #F2F5F9;
+}
+/*
+.ui-icon-calendar{   
+    width: 20px;   
+    height: 20px;  
+	background: url('../images/icon/icn_calendar.png') no-repeat top !important;
+	background-position: 0 0 !important;
+	border-style:0px;
+}
+*/
+.ui-layout-pane-center {
+	overflow:auto;
+	overflow: hidden;
+}
+/*
+.ui-icon-disk{   
+    width: 20px;   
+    height: 20px;  
+	background: url('../images/icon/disk.png') no-repeat top !important;
+	background-position: 0 0 !important;
+	border-style:0px;
+}
+*/
+.ui-icon-doc{   
+    width: 24px;   
+    height: 24px;  
+	background: url('../images/icon/doc.png') no-repeat top !important;
+	background-position: 0 0 !important;
+	border-style:0px;
+}
+
+.ui-icon-exit{   
+    width: 20px;   
+    height: 20px;  
+	background: url('../images/icon/exit.png') no-repeat top !important;
+	background-position: 0 0 !important;
+	border-style:0px;
+}
+
+.ui-icon-helpp{   
+    width: 20px;   
+    height: 20px;  
+	background: url('../images/icon/help.png') no-repeat top !important;
+	background-position: 0 0 !important;
+	border-style:0px;
+}
+
+.ui-selectonemenu-item{
+font-size:11px;
+}
+
+/* ------------------- Estilos agregados ------------------ */
+textarea[type="textarea"][disabled],input[type="text"][disabled],input[type="password"][disabled],select[disabled] {
+	-moz-opacity: 0.8;
+	filter: alpha(opacity = 100); /*IE 6/7*/
+	filter: "alpha(opacity = 100)"; /*IE 8*/
+	opacity: 0.8;
+	background-color: #ececec;
+}
+
+.ui-fieldset,.ui-fieldset .ui-fieldset-legend {
+	padding: 0.25em 1em;
+}
+
+.ui-saju-status {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	padding-top: 4px;
+	padding-left: 4px;
+	z-index: 2000;
+	background-color: #FFFFFF;
+}
+
+.ui-saju-title {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	left: 0px;
+	height: 20px;
+	padding-left: 10px;
+	padding-top: 4px;
+}
+
+.ui-saju-title-menu{
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	left: 0px;
+	height: 25px;
+	padding: 0px;
+}
+
+.ui-saju-menu {
+	position: absolute;
+	top: 25px;
+	right: 0px;
+	left: 0px;
+	height: 31px;
+}
+
+.ui-saju-toolbar {
+	border: none;
+}
+
+.ui-saju-content {
+	position: absolute;
+	top: 60px;
+	right: 0px;
+	left: 0px;
+	bottom: 0px;
+	overflow: auto;
+	padding: 1px;
+}
+
+.ui-saju-content-only {
+	position: absolute;
+	top: 27px;
+	right: 0px;
+	left: 0px;
+	bottom: 0px;
+	overflow: auto;
+	padding: 1px;
+}
+
+.ui-saju-date input[type="text"] {
+	width: 84px;
+}
+
+.row-color-red {
+	color: red;	
+}

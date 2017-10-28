@@ -1,0 +1,244 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/templates/Master.xhtml">
+
+	<ui:define name="contenido">
+
+		<h:form id="form">
+			<p:growl id="growl" showDetail="true" sticky="true" />
+			<p:panel header="Buscar de Cliente">
+				<p:panelGrid columns="6">
+
+					<p:outputLabel value="Ingrese Nombres y Apellidos:*" />
+					<p:inputText value="#{clienteManaged.nombres}" style="width:260px" />
+
+
+					<p:outputLabel value="Ingrese el Numero de DNI:*" />
+					<p:inputText value="#{clienteManaged.dni}" />
+
+					<p:commandButton actionListener="#{clienteManaged.buscarCliente}"
+						value="Buscar" update="panelClienteEncontrado,growl">
+
+					</p:commandButton>
+
+				</p:panelGrid>
+			</p:panel>
+
+			<p:panel id="panelClienteEncontrado" header="Cliente Encontrado">
+
+				<p:dataTable value="#{clienteManaged.lista}" var="c">
+
+					<f:facet name="header">
+						<p:outputLabel value="Consultar Cliente" />
+					</f:facet>
+					<p:column headerText="Primer Nombre" style="font-weight:bold">
+						<p:outputLabel value="#{c.nombre1}" style="font-weight:bold" />
+					</p:column>
+
+					<p:column headerText="Segundo Nombre" style="font-weight:bold">
+						<p:outputLabel value="#{c.nombre2}" style="font-weight:bold" />
+					</p:column>
+
+					<p:column headerText="Apellido Paterno" style="font-weight:bold">
+						<p:outputLabel value="#{c.apellidop}" style="font-weight:bold" />
+					</p:column>
+
+					<p:column headerText="Apellido Materno" style="font-weight:bold">
+						<p:outputLabel value="#{c.apellidom}" style="font-weight:bold" />
+					</p:column>
+
+					<p:column headerText="DNI" style="font-weight:bold">
+						<p:outputLabel value="#{c.dni}" style="font-weight:bold" />
+					</p:column>
+
+					<p:column headerText="Fecha de Nacimiento" style="font-weight:bold">
+						<p:outputLabel value="#{c.fechaNacimiento}">
+							<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+						</p:outputLabel>
+					</p:column>
+
+					<p:column headerText="Fecha de Registro" style="font-weight:bold">
+						<p:outputLabel value="#{c.fechaRegistro}">
+							<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+						</p:outputLabel>
+					</p:column>
+
+					<p:column style="width:32px;text-align: center">
+						<p:commandLink actionListener="#{clienteManaged.buscarClienteID}"
+							update=":frmUpdate" oncomplete="PF('carDialog').show()"
+							title="Ver">
+							<f:attribute name="idCliente" value="#{c.idCliente}" />
+							<p:graphicImage value="/util/images/icons/Select01.png"
+								width="8px" style="float:center;width:25px" />
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+
+		<p:dialog id="edinson" header="Cliente Seleccionado"
+			widgetVar="carDialog" modal="true" showEffect="explode"
+			hideEffect="explode" resizable="false" appendTo="@(body)">
+			<h:form id="frmUpdate">
+				<p:panel id="clienteDetalle" header="Actualizar Cliente"
+					style="text-align:center;">
+					<p:panelGrid columns="4" cellpadding="5">
+						
+
+						<p:outputLabel value="Primer Nombre" />
+						<p:inputText value="#{clienteManaged.objClienteBean.nombre1}" />
+
+						<p:outputLabel value="Segundo Nombre" />
+						<p:inputText value="#{clienteManaged.objClienteBean.nombre2}" />
+
+						<p:outputLabel value="Apellido Paterno" />
+						<p:inputText value="#{clienteManaged.objClienteBean.apellidop}" />
+
+						<p:outputLabel value="Apellido Materno" />
+						<p:inputText value="#{clienteManaged.objClienteBean.apellidom}" />
+
+						<p:outputLabel value="DNI" />
+						<p:inputText value="#{clienteManaged.objClienteBean.dni}" />
+
+						<p:outputLabel for="german" value="Fecha Nacimiento" />
+						<p:calendar id="german"
+							value="#{clienteManaged.objClienteBean.fechaNacimiento}" locale="de"
+							navigator="true" pattern="dd-MM-yyyy" label="Fecha de Nacimiento" />
+
+						<p:outputLabel value="Estado Civil" />
+						<p:selectOneMenu
+							value="#{clienteManaged.objClienteBean.estadoCivil}"
+							label="Estado Civil" style="width:130px">
+							<f:selectItem itemLabel="-Seleccione-" itemValue="" />
+							<f:selectItem itemLabel="Soltero" itemValue="Soltero" />
+							<f:selectItem itemLabel="Casado" itemValue="Casado" />
+							<f:selectItem itemLabel="Divorciado" itemValue="Divorciado" />
+							<f:selectItem itemLabel="Conviviente" itemValue="Conviviente" />
+							<f:selectItem itemLabel="Viudo" itemValue="Viudo" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Sexo" />
+
+						<p:selectOneMenu value="#{clienteManaged.objClienteBean.sexo}"
+							style="width:130px">
+							<f:selectItem itemLabel="-Seleccione-" itemValue="" />
+							<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+							<f:selectItem itemLabel="Femenino" itemValue="Femenino" />
+						</p:selectOneMenu>
+
+
+						<p:outputLabel value="Ocupación" />
+						<p:inputText value="#{clienteManaged.objClienteBean.ocupacion}" />
+
+						<p:outputLabel value="Celular" />
+						<p:inputText value="#{clienteManaged.objClienteBean.celular}" />
+
+
+						<p:outputLabel value="Teléfono" />
+						<p:inputText value="#{clienteManaged.objClienteBean.telefono}" />
+
+						<p:outputLabel value="E-mail." />
+						<p:inputText value="#{clienteManaged.objClienteBean.correo}" />
+					</p:panelGrid>
+				</p:panel>
+				<p:panel id="PanelDireccion" header="Dirección de Cliente">
+
+					<p:panelGrid columns="2" cellpadding="5">
+
+						<p:outputLabel for="Departamento" value="Departamento" style="width:360px"  />	
+									
+					<p:selectOneMenu id="Departamento"  label="Departamento"
+						style="width:260px" >
+						<f:selectItem itemLabel="LIMA" itemValue="" />
+						
+						<p:ajax  update="Provincia" />
+					</p:selectOneMenu>
+					
+					<p:outputLabel for="Provincia" value="Provincia"  />
+					<p:selectOneMenu id="Provincia" style="width:260px"   label="Provincia">
+						<f:selectItem itemLabel="LIMA" itemValue="" />						
+						<p:ajax update="Distrito"/>
+					</p:selectOneMenu>
+					
+					
+					<p:outputLabel for="Distrito" value="Distrito" />
+					
+					<p:selectOneMenu id="Distrito" value="#{clienteManaged.objClienteBean.distrito}"  label="Distrito"
+						style="width:260px">
+						<f:selectItem itemLabel="ANCON" itemValue="ANCON" />
+						<f:selectItem itemLabel="ATE" itemValue="ATE" />
+						<f:selectItem itemLabel="BARRANCO" itemValue="BARRANCO" />
+						<f:selectItem itemLabel="BREÑA" itemValue="BREÑA" />
+						<f:selectItem itemLabel="CARABAYLLO" itemValue="CARABAYLLO" />
+						<f:selectItem itemLabel="CHACLACAYO" itemValue="CHACLACAYO" />
+						<f:selectItem itemLabel="CHORRILLOS" itemValue="CHORRILLOS" />
+						<f:selectItem itemLabel="CIENEGUILLA" itemValue="CIENEGUILLA" />
+						<f:selectItem itemLabel="COMAS" itemValue="COMAS" />
+						<f:selectItem itemLabel="EL AGUSTINO" itemValue="EL AGUSTINO" />
+						<f:selectItem itemLabel="INDEPENDENCIA" itemValue="INDEPENDENCIA" />
+						<f:selectItem itemLabel="JESUS MARIA" itemValue="JESUS MARIA" />
+						<f:selectItem itemLabel="LA MOLINA" itemValue="LA MOLINA" />
+						<f:selectItem itemLabel="LA VICTORIA" itemValue="LA VICTORIA" />
+						<f:selectItem itemLabel="LIMA" itemValue="LIMA" />
+						<f:selectItem itemLabel="LINCE" itemValue="LINCE" />
+						<f:selectItem itemLabel="LOS OLIVOS" itemValue="LOS OLIVOS" />
+						<f:selectItem itemLabel="LURIGANCHO" itemValue="LURIGANCHO" />
+						<f:selectItem itemLabel="LURIN" itemValue="LURIN" />
+						<f:selectItem itemLabel="MAGDALENA DEL MAR" itemValue="MAGDALENA DEL MAR" />
+						<f:selectItem itemLabel="MIRAFLORES" itemValue="MIRAFLORES" />
+						<f:selectItem itemLabel="PACHACAMAC" itemValue="PACHACAMAC" />
+						<f:selectItem itemLabel="PUCUSANA" itemValue="PUCUSANA" />
+						<f:selectItem itemLabel="PUEBLO LIBRE" itemValue="PUEBLO LIBRE" />
+						<f:selectItem itemLabel="PUENTE PIEDRA" itemValue="PUENTE PIEDRA" />
+						<f:selectItem itemLabel="PUNTA HERMOSA" itemValue="PUNTA HERMOSA" />
+						<f:selectItem itemLabel="PUNTA NEGRA" itemValue="PUNTA NEGRA" />
+						<f:selectItem itemLabel="RIMAC" itemValue="RIMAC" />
+						<f:selectItem itemLabel="SAN BARTOLO" itemValue="SAN BARTOLO" />
+						<f:selectItem itemLabel="SAN BORJA" itemValue="SAN BORJA" />
+						<f:selectItem itemLabel="SAN ISIDRO" itemValue="SAN ISIDRO" />
+						<f:selectItem itemLabel="SAN JUAN DE LURIGANCHO" itemValue="SAN JUAN DE LURIGANCHO" />
+						<f:selectItem itemLabel="SAN JUAN DE MIRAFLORES" itemValue="SAN JUAN DE MIRAFLORES" />
+						<f:selectItem itemLabel="SAN LUIS" itemValue="SAN LUIS" />
+						<f:selectItem itemLabel="SAN MARTIN DE PORRES" itemValue="SAN MARTIN DE PORRES" />
+						<f:selectItem itemLabel="SAN MIGUEL" itemValue="SAN MIGUEL" />
+						<f:selectItem itemLabel="SANTA ANITA" itemValue="SANTA ANITA" />
+						<f:selectItem itemLabel="SANTA MARIA DEL MAR" itemValue="SANTA MARIA DEL MAR" />
+						<f:selectItem itemLabel="SANTA ROSA" itemValue="SANTA ROSA" />
+						<f:selectItem itemLabel="SANTIAGO DE SURCO" itemValue="SANTIAGO DE SURCO" />
+						<f:selectItem itemLabel="SURQUILLO" itemValue="SURQUILLO" />
+						<f:selectItem itemLabel="VILLA EL SALVADOR" itemValue="VILLA EL SALVADOR" />
+						<f:selectItem itemLabel="VILLA MARIA DEL TRIUNFO" itemValue="VILLA MARIA DEL TRIUNFO" />
+						
+						
+						
+						<p:ajax update="Distrito" />
+					</p:selectOneMenu>
+						
+					</p:panelGrid>
+					<p:panelGrid columns="2">
+
+					<p:outputLabel for="Direccion" value="Dirección" />
+					<p:inputText id="Direccion" value="#{clienteManaged.objClienteBean.direccion}"  label="Dirección"
+						style="width:360px" />
+
+					<p:outputLabel value="Referencia" />
+					<p:inputText value="#{clienteManaged.objClienteBean.referencia}"
+						style="width:360px" />
+				</p:panelGrid>
+
+					<p:commandButton value="Actualizar" oncomplete="PF('carDialog').hide()" title="Actualizar"
+						actionListener="#{clienteManaged.ActualizarCliente}" update=":form:panelClienteEncontrado">
+
+					</p:commandButton>
+				</p:panel>
+			</h:form>
+		</p:dialog>
+
+
+
+	</ui:define>
+</ui:composition>

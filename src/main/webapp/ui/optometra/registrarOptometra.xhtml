@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/Master.xhtml"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<ui:define name="contenido">
+
+		<h:form>
+			<p:panel id="panelOptometra" header="Registro de Optómetra">
+				
+				<p:growl id="growl" showDetail="true" sticky="true" />
+
+				<p:panelGrid columns="4" cellpadding="5">
+
+					<p:outputLabel for="Primer_Nombre" value="Primer Nombre" />
+					
+					<p:inputText id="Primer_Nombre"
+						value="#{optometraManaged.objOptometra.nombre1}" 
+						label="Primer Nombre" />
+
+					<p:outputLabel value="Segundo Nombre" />
+					<p:inputText value="#{optometraManaged.objOptometra.nombre2}" />
+
+					<p:outputLabel for="Apellido_Paterno" value="Apellido Paterno" />
+					<p:inputText id="Apellido_Paterno"
+						value="#{optometraManaged.objOptometra.apellidop}" 
+						label="Apellido Paterno" />
+
+					<p:outputLabel for="Apellido_Materno" value="Apellido Materno" />
+					<p:inputText id="Apellido_Materno"
+						value="#{optometraManaged.objOptometra.apellidom}"
+						label="Apellido Materno" />
+
+					<p:outputLabel for="DNI" value="DNI" />
+					<p:inputText id="DNI" value="#{optometraManaged.objOptometra.dni}"
+						label="DNI">
+
+					</p:inputText>
+
+
+
+					<p:outputLabel for="german" value="Fecha Nacimiento" />
+					<p:calendar id="german"
+						value="#{optometraManaged.objOptometra.fechaNacimiento}" locale="de"
+						navigator="true" pattern="dd-MM-yyyy" 
+						label="Fecha de Nacimiento" />
+
+
+
+					<p:outputLabel for="Sexo" value="Sexo" />
+
+					<p:selectOneMenu id="Sexo"
+						value="#{optometraManaged.objOptometra.sexo}" required="true"
+						label="Sexo" style="width:130px">
+						<f:selectItem itemLabel="-Seleccione-" itemValue="-Seleccione-" />
+						<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+						<f:selectItem itemLabel="Femenino" itemValue="Femenino" />
+					</p:selectOneMenu>
+
+
+					<p:outputLabel value="Celular" />
+					<p:inputText value="#{optometraManaged.objOptometra.celular}" />
+
+
+					<p:outputLabel value="Teléfono" />
+					<p:inputText value="#{optometraManaged.objOptometra.telefono}" />
+
+					<p:outputLabel value="E-mail." />
+					<p:inputText value="#{optometraManaged.objOptometra.correo}" />
+				</p:panelGrid>
+
+			</p:panel>
+
+			<p:panel id="PanelDireccion" header="Dirección de Optómetra">
+
+
+				<p:panelGrid columns="2">
+
+					<p:outputLabel for="Direccion" value="Dirección" />
+					<p:inputText id="Direccion"
+						value="#{optometraManaged.objOptometra.direccion}" required="true"
+						label="Dirección" style="width:360px" />
+
+					<p:outputLabel value="Referencia" />
+					<p:inputText value="#{optometraManaged.objOptometra.referencia}"
+						style="width:360px" />
+				</p:panelGrid>
+
+
+			</p:panel>
+			<p:panel id="AccesoalSistema" header="Acceso al Sistema ">
+				<p:panelGrid columns="2">
+				
+					<p:outputLabel value="Estado:*"/>
+					<p:selectOneMenu value="#{optometraManaged.estado}" style="width:185px" >
+					<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
+					<f:selectItems value="#{optometraManaged.estadoOptometra}" var="e"
+					 itemLabel="#{e.descripcion}" itemValue="#{e.idEstado}" />
+					</p:selectOneMenu>
+					
+
+					<p:outputLabel value="Usuario:*" />
+					<p:inputText value="#{optometraManaged.objOptometra.usuario}"
+					style="width:200px" />
+
+					<p:outputLabel value="Clave:*" />
+					
+					<p:password value="#{optometraManaged.objOptometra.clave}"
+					style="width:200px" />
+					<p:outputLabel value="Repetir Clave:*" />
+					
+					<p:password value="#{optometraManaged.clave}"
+					style="width:200px" />
+
+				</p:panelGrid>
+
+			</p:panel>
+			<p:commandButton value="Registrar"
+				action="#{optometraManaged.grabarOptometra}" validateClient="true" update="panelOptometra,PanelDireccion,AccesoalSistema,growl"
+				/>
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      template="/templates/Master.xhtml"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"> 
+
+<ui:define name="contenido">
+	 
+	 <h:form id="frmRegistrar" >
+	<p:panel id="panelPrincipal" header="Registro de Cliente">
+	
+	 <p:growl id="growl" showDetail="true" sticky="true" /> 
+
+	
+		<p:panelGrid columns="4" cellpadding="5">		
+			
+			<p:outputLabel  value="Primer Nombre"/>
+			<p:inputText id="Primer_Nombre" value="#{clienteManaged.objClienteBean.nombre1}"   />
+			
+			<p:outputLabel value="Segundo Nombre"/>			
+			<p:inputText value="#{clienteManaged.objClienteBean.nombre2}"  />
+			
+			<p:outputLabel value="Apellido Paterno"/>
+			<p:inputText id="Apellido_Paterno" value="#{clienteManaged.objClienteBean.apellidop}"   />
+			
+			<p:outputLabel  value="Apellido Materno"/>
+			<p:inputText id="Apellido_Materno" value="#{clienteManaged.objClienteBean.apellidom}"   />
+			
+			<p:outputLabel for="DNI" value="DNI"/>			
+			<p:inputText id="DNI" value="#{clienteManaged.objClienteBean.dni}" label="DNI">
+            
+            </p:inputText>
+            
+			
+				
+			<p:outputLabel for="german" value="Fecha Nacimiento" />
+				<p:calendar id="german" value="#{clienteManaged.fechaNacimiento}"
+					locale="de" navigator="true" pattern="dd-MM-yyyy"  label="Fecha de Nacimiento" />
+			
+			<p:outputLabel for="estado_civil" value="Estado Civil" />
+				<p:selectOneMenu id="estado_civil" value="#{clienteManaged.objClienteBean.estadoCivil}"  label="Estado Civil"
+						style="width:130px">
+						<f:selectItem itemLabel="-Seleccione-" itemValue="-Seleccione-" />
+						<f:selectItem itemLabel="Soltero" itemValue="Soltero" />
+						<f:selectItem itemLabel="Casado" itemValue="Casado" />
+						<f:selectItem itemLabel="Divorciado" itemValue="Divorciado" />
+						<f:selectItem itemLabel="Conviviente" itemValue="Conviviente" />
+						<f:selectItem itemLabel="Viudo" itemValue="Viudo" />
+					</p:selectOneMenu>	
+			
+			<p:outputLabel for="Sexo" value="Sexo" />
+			
+			<p:selectOneMenu id="Sexo" value="#{clienteManaged.objClienteBean.sexo}"  label="Sexo"
+						 style="width:130px"> 
+			<f:selectItem itemLabel="-Seleccione-" itemValue="-Seleccione-" />
+				<f:selectItem itemLabel="Masculino" itemValue="Masculino"/>
+				<f:selectItem itemLabel="Femenino" itemValue="Femenino"/>
+			</p:selectOneMenu>
+			
+			
+			<p:outputLabel value="Ocupación"/>
+			<p:inputText value="#{clienteManaged.objClienteBean.ocupacion}"/>	
+			
+			<p:outputLabel value="Celular"/>
+			<p:inputText value="#{clienteManaged.objClienteBean.celular}"/>	
+			
+			
+			<p:outputLabel value="Teléfono"/>
+			<p:inputText value="#{clienteManaged.objClienteBean.telefono}"/>	
+			
+			<p:outputLabel value="E-mail."/>
+			<p:inputText value="#{clienteManaged.objClienteBean.correo}"/>	
+		</p:panelGrid>
+	</p:panel>
+	<p:panel id="PanelDireccion" header="Dirección de Cliente">
+			
+			<p:panelGrid  columns="2" cellpadding="5">			
+			
+					<p:outputLabel for="Departamento" value="Departamento" style="width:360px"  />	
+									
+					<p:selectOneMenu id="Departamento"  label="Departamento"
+						style="width:260px" >
+						<f:selectItem itemLabel="LIMA" itemValue="" />
+						
+						<p:ajax  update="Provincia" />
+					</p:selectOneMenu>
+					
+					<p:outputLabel for="Provincia" value="Provincia"  />
+					<p:selectOneMenu id="Provincia" style="width:260px"   label="Provincia">
+						<f:selectItem itemLabel="LIMA" itemValue="" />						
+						<p:ajax update="Distrito"/>
+					</p:selectOneMenu>
+					
+					
+					<p:outputLabel for="Distrito" value="Distrito" />
+					
+					<p:selectOneMenu id="Distrito" value="#{clienteManaged.objClienteBean.distrito}"  label="Distrito"
+						style="width:260px" >
+						<f:selectItem itemLabel="ANCON" itemValue="ANCON" />
+						<f:selectItem itemLabel="ATE" itemValue="ATE" />
+						<f:selectItem itemLabel="BARRANCO" itemValue="BARRANCO" />
+						<f:selectItem itemLabel="BREÑA" itemValue="BREÑA" />
+						<f:selectItem itemLabel="CARABAYLLO" itemValue="CARABAYLLO" />
+						<f:selectItem itemLabel="CHACLACAYO" itemValue="CHACLACAYO" />
+						<f:selectItem itemLabel="CHORRILLOS" itemValue="CHORRILLOS" />
+						<f:selectItem itemLabel="CIENEGUILLA" itemValue="CIENEGUILLA" />
+						<f:selectItem itemLabel="COMAS" itemValue="COMAS" />
+						<f:selectItem itemLabel="EL AGUSTINO" itemValue="EL AGUSTINO" />
+						<f:selectItem itemLabel="INDEPENDENCIA" itemValue="INDEPENDENCIA" />
+						<f:selectItem itemLabel="JESUS MARIA" itemValue="JESUS MARIA" />
+						<f:selectItem itemLabel="LA MOLINA" itemValue="LA MOLINA" />
+						<f:selectItem itemLabel="LA VICTORIA" itemValue="LA VICTORIA" />
+						<f:selectItem itemLabel="LIMA" itemValue="LIMA" />
+						<f:selectItem itemLabel="LINCE" itemValue="LINCE" />
+						<f:selectItem itemLabel="LOS OLIVOS" itemValue="LOS OLIVOS" />
+						<f:selectItem itemLabel="LURIGANCHO" itemValue="LURIGANCHO" />
+						<f:selectItem itemLabel="LURIN" itemValue="LURIN" />
+						<f:selectItem itemLabel="MAGDALENA DEL MAR" itemValue="MAGDALENA DEL MAR" />
+						<f:selectItem itemLabel="MIRAFLORES" itemValue="MIRAFLORES" />
+						<f:selectItem itemLabel="PACHACAMAC" itemValue="PACHACAMAC" />
+						<f:selectItem itemLabel="PUCUSANA" itemValue="PUCUSANA" />
+						<f:selectItem itemLabel="PUEBLO LIBRE" itemValue="PUEBLO LIBRE" />
+						<f:selectItem itemLabel="PUENTE PIEDRA" itemValue="PUENTE PIEDRA" />
+						<f:selectItem itemLabel="PUNTA HERMOSA" itemValue="PUNTA HERMOSA" />
+						<f:selectItem itemLabel="PUNTA NEGRA" itemValue="PUNTA NEGRA" />
+						<f:selectItem itemLabel="RIMAC" itemValue="RIMAC" />
+						<f:selectItem itemLabel="SAN BARTOLO" itemValue="SAN BARTOLO" />
+						<f:selectItem itemLabel="SAN BORJA" itemValue="SAN BORJA" />
+						<f:selectItem itemLabel="SAN ISIDRO" itemValue="SAN ISIDRO" />
+						<f:selectItem itemLabel="SAN JUAN DE LURIGANCHO" itemValue="SAN JUAN DE LURIGANCHO" />
+						<f:selectItem itemLabel="SAN JUAN DE MIRAFLORES" itemValue="SAN JUAN DE MIRAFLORES" />
+						<f:selectItem itemLabel="SAN LUIS" itemValue="SAN LUIS" />
+						<f:selectItem itemLabel="SAN MARTIN DE PORRES" itemValue="SAN MARTIN DE PORRES" />
+						<f:selectItem itemLabel="SAN MIGUEL" itemValue="SAN MIGUEL" />
+						<f:selectItem itemLabel="SANTA ANITA" itemValue="SANTA ANITA" />
+						<f:selectItem itemLabel="SANTA MARIA DEL MAR" itemValue="SANTA MARIA DEL MAR" />
+						<f:selectItem itemLabel="SANTA ROSA" itemValue="SANTA ROSA" />
+						<f:selectItem itemLabel="SANTIAGO DE SURCO" itemValue="SANTIAGO DE SURCO" />
+						<f:selectItem itemLabel="SURQUILLO" itemValue="SURQUILLO" />
+						<f:selectItem itemLabel="VILLA EL SALVADOR" itemValue="VILLA EL SALVADOR" />
+						<f:selectItem itemLabel="VILLA MARIA DEL TRIUNFO" itemValue="VILLA MARIA DEL TRIUNFO" />
+						
+						
+						
+						<p:ajax update="Distrito" />
+					</p:selectOneMenu>
+					</p:panelGrid>
+					<p:panelGrid columns="2">
+
+					<p:outputLabel for="Direccion" value="Dirección" />
+					<p:inputText id="Direccion" value="#{clienteManaged.objClienteBean.direccion}"  label="Dirección"
+						style="width:360px" />
+
+					<p:outputLabel value="Referencia" />
+					<p:inputText value="#{clienteManaged.objClienteBean.referencia}"
+						style="width:360px" />
+				</p:panelGrid>
+				
+						
+		<p:commandButton  value="Registar Cliente" 
+		action="#{clienteManaged.RegistrarCliente}"
+		 update="panelPrincipal,PanelDireccion,growl"  />
+		
+	</p:panel>
+	
+	<p:dialog modal="true" resizable="false" header="Values"
+			widgetVar="dlg" showEffect="fold">
+			<p:panelGrid id="display" columns="2" columnClasses="label,value">
+
+				<h:outputText value="german" />
+				<h:outputText value="#{clienteManaged.objClienteBean.fechaNacimiento}">
+					<f:convertDateTime pattern="dd-mm-yyyy" />
+				</h:outputText>
+				
+				
+			</p:panelGrid>
+		</p:dialog>
+</h:form>
+	 
+</ui:define>
+
+</ui:composition>

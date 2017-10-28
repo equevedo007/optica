@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" 
+	template="/templates/Master.xhtml">
+
+	<ui:define name="contenido">
+
+		<h:form id="frmDertalle">
+
+
+
+			<p:panel  header="Criterios de Busqueda">
+
+				<p:panelGrid columns="7">
+
+					
+					<p:outputLabel value=" Meses:*" style="font-weight:bold" />
+
+					<p:selectOneMenu value="#{reporteManaged.mes}" style="width:130px">
+						<f:selectItem itemLabel="-Seleccione-" itemValue="" />
+						<f:selectItem itemLabel="Enero" itemValue="01" />
+						<f:selectItem itemLabel="Febrero" itemValue="02" />
+						<f:selectItem itemLabel="Marzo" itemValue="03" />
+						<f:selectItem itemLabel="Abril" itemValue="04" />
+						<f:selectItem itemLabel="Mayo" itemValue="05" />
+						<f:selectItem itemLabel="Junio" itemValue="06" />
+						<f:selectItem itemLabel="Julio" itemValue="07" />
+						<f:selectItem itemLabel="Agosto" itemValue="08" />
+						<f:selectItem itemLabel="Septiembre" itemValue="09" />
+						<f:selectItem itemLabel="Octubre" itemValue="10" />
+						<f:selectItem itemLabel="Noviembre" itemValue="11" />
+						<f:selectItem itemLabel="Diciembre" itemValue="12" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Año:*" style="font-weight:bold" />
+
+					<p:selectOneMenu value="#{reporteManaged.anno}" style="width:130px">
+						<f:selectItem itemLabel="-Seleccione-" itemValue="" />						
+						<f:selectItem itemLabel="2017" itemValue="2017" />
+						<f:selectItem itemLabel="2018" itemValue="2018" />
+						<f:selectItem itemLabel="2019" itemValue="2019" />
+						<f:selectItem itemLabel="2020" itemValue="2020" />
+						
+					</p:selectOneMenu>
+
+					<p:commandButton value="Buscar" style="font-weight:bold"
+						actionListener="#{reporteManaged.EjecutarReporte}"
+						update=":frmDertalle:tblDetalle" />
+
+				</p:panelGrid>
+
+			</p:panel>
+
+			
+
+			<p:panel id="pnlTabla" header="Detalle de Pacientes ">
+
+				<p:dataTable id="tblDetalle" var="l" value="#{reporteManaged.lista}" 
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+					paginator="true" rows="20" style="margin-bottom:20px;width:1200px" >
+
+					<f:facet name="{Exporters}" style="text-align:right">
+					
+						<p:commandLink title="Exportar" actionListener="#{reporteManaged.exportarPDF}" ajax="false" style="text-align:right" >
+							<p:graphicImage value="/util/images/icons/pdf.jpg" width="24" />							
+						</p:commandLink>
+					
+						
+					</f:facet>
+
+
+					<p:column headerText="Nombre del Paciente" style="width:300px" >
+						<p:outputLabel value="#{l.nombres}" />
+					</p:column>
+
+					<p:column headerText="DNI" style="width:100px" >
+						<p:outputLabel value="#{l.dni}" />
+					</p:column>
+
+					<p:column headerText="Celular" style="width:80px" >
+						<p:outputLabel value="#{l.celular}" />
+					</p:column>
+
+					<p:column headerText="Teléfono" style="width:80px" >
+						<p:outputLabel value="#{l.telefono}" />
+					</p:column>
+
+					<p:column headerText="Fecha de Registro" style="width:100px" >
+						<p:outputLabel value="#{l.fechaRegistro}" />
+					</p:column>
+					
+					<p:column headerText="Citado para" style="width:50px" >
+						<p:outputLabel value="#{l.mesProximoControl} Meses" />
+					</p:column>
+
+					<p:column headerText="Fecha del Proximo Control" style="width:100px" >
+						<p:outputLabel value="#{l.fechaPrxControl}" />
+					</p:column>
+
+				</p:dataTable>
+
+			</p:panel>
+
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

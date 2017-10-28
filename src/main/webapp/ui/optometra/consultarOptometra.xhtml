@@ -1,0 +1,98 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	 template="/templates/Master.xhtml">
+	 
+	<ui:define name="contenido">
+
+		<h:form id="form">
+		<p:growl id="growl" showDetail="true" sticky="true" /> 
+		  
+			<p:panel  header="Buscar de Optometra">
+				<p:panelGrid columns="6">		
+								
+					
+					<p:outputLabel value="Ingrese Nombres y Apellidos:*" />
+					<p:inputText value="#{optometraManaged.nombres}" style="width:260px"/>
+					
+					
+					<p:outputLabel value="Ingrese el Numero de DNI:*" />
+					<p:inputText value="#{optometraManaged.dni}"/>
+					
+					<p:commandButton actionListener="#{optometraManaged.buscarOptometra}"  value="Buscar" 
+					update="panelClienteEncontrado,growl">
+					
+					</p:commandButton>
+					
+				</p:panelGrid>
+			</p:panel>
+			
+			<p:panel id="panelClienteEncontrado" header="Optometra Encontrado" >
+			
+				<p:dataTable value="#{optometraManaged.lista}" var="c">
+				
+					<f:facet name="header">
+            <p:outputLabel value="Consultar Cliente"/>
+        </f:facet>
+					<p:column headerText="Primer Nombre" style="font-weight:bold">
+						<p:outputLabel value="#{c.nombre1}" style="font-weight:bold"/>
+					</p:column>
+					
+					<p:column headerText="Segundo Nombre" style="font-weight:bold">
+						<p:outputLabel value="#{c.nombre2}" style="font-weight:bold"/>
+					</p:column>
+					
+					<p:column headerText="Apellido Paterno" style="font-weight:bold">
+						<p:outputLabel value="#{c.apellidop}" style="font-weight:bold"/>
+					</p:column>
+					
+					<p:column headerText="Apellido Materno" style="font-weight:bold">
+						<p:outputLabel value="#{c.apellidom}" style="font-weight:bold"/>
+					</p:column>
+					
+					<p:column headerText="DNI" style="font-weight:bold">
+						<p:outputLabel value="#{c.dni}" style="font-weight:bold"/>
+					</p:column>
+					
+					<p:column headerText="Fecha de Nacimiento" style="font-weight:bold">
+						<p:outputLabel value="#{c.fechaNacimiento}" >
+						  <f:convertDateTime type="date"   pattern="dd-MM-yyyy" />
+						</p:outputLabel>
+					</p:column>
+					
+					<p:column headerText="Fecha de Registro" style="font-weight:bold">
+						<p:outputLabel value="#{c.fechaRegistro}" >
+						  <f:convertDateTime type="date"   pattern="dd-MM-yyyy" />
+						</p:outputLabel>
+					</p:column>
+					
+					
+					
+				</p:dataTable>
+				
+				<p:dialog header="Datos del Cliente" widgetVar="carDialog" appendTo="@(body)" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+        
+            <p:panelGrid  columns="2" rendered="#{not empty OptometraManaged.objOptometra}" columnClasses="label,value">
+                <f:facet name="header">
+                    <p:outputLabel value="Optometra"/> 
+                </f:facet>
+               
+                <p:outputLabel for="Primer_Nombre" value="Primer Nombre"/>
+			<p:inputText id="Primer_Nombre" value="#{OptometraManaged.objOptometra.nombre1}"  label="Primer Nombre" />
+			
+ 
+                
+            </p:panelGrid>
+       
+    </p:dialog>
+				
+				
+			</p:panel>
+	
+			
+		</h:form>
+	</ui:define>
+</ui:composition>

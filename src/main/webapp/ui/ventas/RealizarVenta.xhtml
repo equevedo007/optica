@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" 
+	template="/templates/Master.xhtml"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<ui:define name="contenido">
+
+		<p:panel id="pnlPrincipal" header="Relizar Ventas">
+
+			<h:form id="frmVentas">
+				<p:growl id="msgs" showDetail="true" />
+				<p:panelGrid columns="12">
+				
+					<p:outputLabel value="Cliente" />
+					<p:inputText value="#{RealizarVenta.nombres_Cliente}" style="width:260px" />
+					<p:commandLink onclick="PF('Cliente').show();">
+						<p:graphicImage value="/util/images/icons/buscar.png" width="10px"
+							style="float:center;width:30px" />
+					</p:commandLink>
+					<p:outputLabel value="Producto" />
+					<p:inputText value="" disabled="true" style="width:260px" />
+					<p:commandLink onclick="PF('dialogProducto').show();">
+						<p:graphicImage value="/util/images/icons/Add.png" width="10px"
+							style="float:center;width:30px" />
+					</p:commandLink>
+				</p:panelGrid>
+				
+				<p:panel id="DetalleVenta" header="Detalle de Venta" >
+					<p:dataTable binding="#{table}" value="#{RealizarVenta.listaDetalleProducto}" var="l" 
+						editable="true" editMode="cell">
+
+						<p:column headerText="Tipo de Producto">
+							<p:outputLabel value=""/>
+						</p:column>
+						
+						<p:column headerText="Nombre Producto">
+							<p:outputLabel value="" />
+						</p:column>
+
+						<p:column headerText="Marca">
+							<p:outputLabel value="" />
+						</p:column>
+
+
+						<p:column headerText="Cantidad">
+							<h:inputText value="#{RealizarVenta.listaDetalleProducto[table.rowIndex].cantidad}" style="width:50px"/>
+						</p:column>
+
+						<p:column headerText="Precio">
+							<p:inputText value="#{l.precioUnidad}"
+								style="width:50px;text-align:center" />
+						</p:column>
+
+						<p:column headerText="IVG">
+							<p:outputLabel value="#{l.subTotal}" />
+						</p:column>
+
+						<p:column headerText="Total">
+							<p:outputLabel value="#{l.total}" />
+						</p:column>
+
+						<p:column headerText="Eliminar">
+
+							<p:commandLink actionListener="#{RealizarVenta.EliminarProductoDetalle}" update=":frmVentas:DetalleVenta">
+								<p:graphicImage value="/util/images/icons/eliminar.png"
+									width="7px" style="float:center;width:22px" />
+								<f:attribute name="edinson" value="#{l.idProducto}" />									
+							</p:commandLink>
+
+						</p:column>
+
+
+					</p:dataTable>
+					
+					<p:panelGrid columns="2" style="text-align: right;width:100%;box-shadow: 0px 0px 2px rgba(0,0,0,0,7);padding: 7px">											
+							<p:outputLabel value="Total:*" style=";box-shadow: 0px 0px 2px rgba(0,0,0,0,7);padding: 7px;font-weight:bold"/>						
+							<p:outputLabel value="S/.#{RealizarVenta.total}" style="box-shadow: 0px 0px 2px rgba(0,0,0,0,7);padding: 7px;font-weight:bold"/>							
+							<p:outputLabel value="Sub-Total:*" style=";box-shadow: 0px 0px 2px rgba(0,0,0,0,7);padding: 7px;font-weight:bold"/>						
+							<p:outputLabel value="S/.#{RealizarVenta.totalIGVBoleta}" style="box-shadow: 0px 0px 2px rgba(0,0,0,0,7);padding: 7px;font-weight:bold"/>							
+					</p:panelGrid>
+
+				</p:panel>				
+			</h:form>
+		</p:panel>
+		
+		<p:dialog widgetVar="Cliente" modal="true" showEffect="explode"
+				hideEffect="explode" resizable="false" appendTo="@(body)"
+				width="1024px">
+
+				<h:form id="frmDialogoCliente">
+					<p:panel header="Buscar de Cliente">
+						<p:panelGrid columns="6">
+
+							<p:outputLabel value="Ingrese Nombres y Apellidos:*" />
+							<p:inputText value="#{RealizarVenta.nombres_Cliente}" />
+
+							<p:outputLabel id="txtNombres" value="Ingrese el Numero de DNI:*" />
+							<p:inputText value="#{RealizarVenta.DNI}" />
+
+
+							<p:commandButton 
+								value="Buscar"
+								actionListener="#{RealizarVenta.buscarCliente}"
+								update=":frmDialogoCliente:tblCliente">
+							</p:commandButton>
+						</p:panelGrid>
+					</p:panel>
+					<p:panel id="tblCliente">
+						<p:dataTable value="#{RealizarVenta.listaCliente}" var="c"
+							scrollable="true" scrollHeight="150">
+
+							<f:facet name="header">
+								<p:outputLabel value="Consultar Cliente" />
+							</f:facet>
+							<p:column headerText="Primer Nombre" style="font-weight:bold">
+								<p:outputLabel value="#{c.nombre1}" style="font-weight:bold" />
+							</p:column>
+
+							<p:column headerText="Segundo Nombre" style="font-weight:bold">
+								<p:outputLabel value="#{c.nombre2}" style="font-weight:bold" />
+							</p:column>
+
+							<p:column headerText="Apellido Paterno" style="font-weight:bold">
+								<p:outputLabel value="#{c.apellidop}" style="font-weight:bold" />
+							</p:column>
+
+							<p:column headerText="Apellido Materno" style="font-weight:bold">
+								<p:outputLabel value="#{c.apellidom}" style="font-weight:bold" />
+							</p:column>
+
+							<p:column headerText="DNI" style="font-weight:bold">
+								<p:outputLabel value="#{c.dni}" style="font-weight:bold" />
+							</p:column>
+
+							<p:column headerText="Fecha de Nacimiento"
+								style="font-weight:bold">
+								<p:outputLabel value="#{c.fechaNacimiento}">
+									<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+								</p:outputLabel>
+							</p:column>
+
+							<p:column headerText="Fecha de Registro" style="font-weight:bold">
+								<p:outputLabel value="#{c.fechaRegistro}">
+									<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+								</p:outputLabel>
+							</p:column>
+
+							<p:column id="txtid" style="width:32px;text-align: center">
+
+								<p:commandLink onclick="PF('Cliente').hide();"
+									actionListener="#{RealizarVenta.buscarClienteID}"
+									icon="ui-icon-search" update="frmVentas">
+									<f:attribute name="idCliente" value="#{c.idCliente}" />
+									<p:graphicImage value="/util/images/icons/Select01.png"
+										width="8px" style="float:center;width:25px" />
+								</p:commandLink>
+
+
+							</p:column>
+						</p:dataTable>
+					</p:panel>
+				</h:form>
+			</p:dialog>
+		
+		<p:dialog widgetVar="dialogProducto" modal="true"
+				showEffect="explode" hideEffect="explode" resizable="false"
+				appendTo="@(body)" width="1024px">
+				<h:form id="frmProducto">
+
+					<p:panel header="Buscar Producto" style="float:center">
+
+						<p:panelGrid columns="5">
+
+							<p:outputLabel value="Código Producto" />
+
+							<p:inputText value="#{RealizarVenta.idProducto}" />
+
+
+
+							<p:outputLabel value="Tipo de producto" />
+
+							<p:selectOneMenu value="#{RealizarVenta.idTipoProducto}"
+								style="width:155px">
+								<f:selectItem itemLabel="--Seleccione--" itemValue="seleccione" />
+								<f:selectItems value="#{RealizarVenta.listaTipoProducto}" var="t"
+									itemLabel="#{t.descripcion}" itemValue="#{t.idTipoProdicto}" />
+							</p:selectOneMenu>
+							<p:commandButton value="Buscar"
+											 actionListener="#{RealizarVenta.buscarProducto}"
+											 update="frmProducto:tablaDetalleProducto"/>
+
+						</p:panelGrid>
+
+					</p:panel>
+
+					<p:panel id="tablaDetalleProducto"  header="Detalle del Producto">
+						<p:dataTable  value="#{RealizarVenta.listaProducto}" var="v"
+							scrollable="true" scrollHeight="150">
+
+							<p:column headerText="Código Producto">
+								<p:outputLabel value="#{v.idProducto}" />
+							</p:column>
+							<p:column headerText="Marca">
+								<p:outputLabel value="#{v.marca}" />
+							</p:column>
+
+							<p:column headerText="Precio">
+								<p:outputLabel value="#{v.precio}" />
+							</p:column>
+
+							<p:column headerText="Cantidad">
+								<p:outputLabel value="#{v.cantidad}" />
+							</p:column>
+
+							
+
+							<p:column filterBy="#{v.descripcion}" headerText="Descripción">
+								<p:outputLabel value="#{v.descripcion}" />
+							</p:column>
+
+							<p:column headerText="Seleccionar">
+								<p:commandLink onclick="PF('dialogProducto').hide();"
+									actionListener="#{RealizarVenta.buscarProductoID}"
+									title="Seleccionar">
+									<f:attribute name="idProducto" value="#{v.idProducto}" />
+									<p:graphicImage value="/util/images/icons/Select01.png"
+										width="8px" style="float:center;width:25px" />
+								</p:commandLink>
+							</p:column>
+							
+						</p:dataTable>
+					</p:panel>
+				</h:form>
+			</p:dialog>
+
+	</ui:define>
+
+</ui:composition>

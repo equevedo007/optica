@@ -1,0 +1,214 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/templates/Master.xhtml">
+
+	<ui:define name="contenido">
+
+		<h:form id="frmOptometra">
+			<p:growl id="growl" showDetail="true" sticky="true" />
+
+			<p:panel header="Buscar de Optometra">
+				<p:panelGrid columns="6">
+
+
+					<p:outputLabel value="Ingrese Nombres y Apellidos:*" />
+					<p:inputText value="#{optometraManaged.nombres}"
+						style="width:260px" />
+
+
+					<p:outputLabel value="Ingrese el Numero de DNI:*" />
+					<p:inputText value="#{optometraManaged.dni}" />
+
+					<p:commandButton
+						actionListener="#{optometraManaged.buscarOptometra}"
+						value="Buscar" update="panelOptometra,growl">
+
+					</p:commandButton>
+
+				</p:panelGrid>
+			</p:panel>
+
+			<p:panel id="panelOptometra" header="Optometra Encontrado">
+
+				<p:dataTable value="#{optometraManaged.lista}" var="c">
+
+
+					<p:column headerText="Primer Nombre" style="font-weight:bold">
+						<p:outputLabel value="#{c.nombre1}" style="font-weight:bold" />
+					</p:column>
+
+					<p:column headerText="Segundo Nombre" style="font-weight:bold">
+						<p:outputLabel value="#{c.nombre2}" style="font-weight:bold" />
+					</p:column>
+
+					<p:column headerText="Apellido Paterno" style="font-weight:bold">
+						<p:outputLabel value="#{c.apellidop}" style="font-weight:bold" />
+					</p:column>
+
+					<p:column headerText="Apellido Materno" style="font-weight:bold">
+						<p:outputLabel value="#{c.apellidom}" style="font-weight:bold" />
+					</p:column>
+
+					<p:column headerText="DNI" style="font-weight:bold">
+						<p:outputLabel value="#{c.dni}" style="font-weight:bold" />
+					</p:column>
+
+					<p:column headerText="Fecha de Nacimiento" style="font-weight:bold">
+						<p:outputLabel value="#{c.fechaNacimiento}">
+							<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+						</p:outputLabel>
+					</p:column>
+
+					<p:column headerText="Fecha de Registro" style="font-weight:bold">
+						<p:outputLabel value="#{c.fechaRegistro}">
+							<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+						</p:outputLabel>
+					</p:column>
+
+					<p:column style="width:32px;text-align: center">
+						<p:commandLink actionListener="#{optometraManaged.buscarID}"
+							oncomplete="PF('OptDialog').show()" update=":dialogo">
+							<p:graphicImage value="/util/images/icons/Select01.png"
+								width="8px" style="float:center;width:25px" />
+							<f:attribute name="idOptometra" value="#{c.idOptometra}" />
+						</p:commandLink>
+					</p:column>
+
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+
+		<p:dialog id="dialogOpt" header="Optómetra  Seleccionado"
+			widgetVar="OptDialog" modal="true" showEffect="explode"
+			hideEffect="explode" resizable="false" appendTo="@(body)">
+			<h:form id="dialogo">
+
+
+				<p:panel header="Datos de Sistema">
+
+					<p:panelGrid columns="4" cellpadding="5">
+
+						<p:outputLabel value="Usuario de sistema:*"
+							style="font-weight:bold" />
+						<p:outputLabel value="#{optometraManaged.objOptometra.usuario}" />
+
+						<p:outputLabel value="Estado Actual:*" style="font-weight:bold" />
+
+						<p:outputLabel value="#{optometraManaged.descripEstado}" />
+
+					</p:panelGrid>
+
+				</p:panel>
+
+				<p:panel header="Cambiar Estado del Optometra">
+
+					<p:panelGrid columns="2" cellpadding="5">
+						<p:outputLabel value="Estado:*" style="font-weight:bold"/>
+						<p:selectOneMenu value="#{optometraManaged.estado}"
+							style="width:185px">
+							<f:selectItem itemLabel="--Seleccione--" itemValue="Seleccione" />
+							<f:selectItems value="#{optometraManaged.estadoOptometra}"
+								var="e" itemLabel="#{e.descripcion}" itemValue="#{e.idEstado}" />
+						</p:selectOneMenu>
+					</p:panelGrid>
+
+				</p:panel>
+
+
+				<p:panel header="Actualizar Optómetra">
+					<p:panelGrid columns="4" cellpadding="5">
+
+						<p:outputLabel for="Primer_Nombre" value="Primer Nombre"
+							style="font-weight:bold" />
+						<p:inputText id="Primer_Nombre"
+							value="#{optometraManaged.objOptometra.nombre1}"
+							label="Primer Nombre" />
+
+						<p:outputLabel value="Segundo Nombre" style="font-weight:bold" />
+						<p:inputText value="#{optometraManaged.objOptometra.nombre2}" />
+
+						<p:outputLabel for="Apellido_Paterno" value="Apellido Paterno:*"
+							style="font-weight:bold" />
+						<p:inputText id="Apellido_Paterno"
+							value="#{optometraManaged.objOptometra.apellidop}"
+							label="Apellido Paterno" />
+
+						<p:outputLabel for="Apellido_Materno" value="Apellido Materno:*"
+							style="font-weight:bold" />
+						<p:inputText id="Apellido_Materno"
+							value="#{optometraManaged.objOptometra.apellidom}"
+							label="Apellido Materno" />
+
+						<p:outputLabel for="DNI" value="DNI:*" style="font-weight:bold" />
+						<p:inputText id="DNI" value="#{optometraManaged.objOptometra.dni}"
+							label="DNI">
+
+						</p:inputText>
+
+
+
+						<p:outputLabel for="german" value="Fecha Nacimiento:*"
+							style="font-weight:bold" />
+						<p:calendar id="german"
+							value="#{optometraManaged.objOptometra.fechaNacimiento}"
+							locale="de" navigator="true" pattern="dd-MM-yyyy"
+							label="Fecha de Nacimiento" />
+
+
+
+						<p:outputLabel for="Sexo" value="Sexo" style="font-weight:bold" />
+
+						<p:selectOneMenu id="Sexo"
+							value="#{optometraManaged.objOptometra.sexo}" label="Sexo"
+							style="width:130px">
+							<f:selectItem itemLabel="-Seleccione-" itemValue="" />
+							<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+							<f:selectItem itemLabel="Femenino" itemValue="Femenino" />
+						</p:selectOneMenu>
+
+
+						<p:outputLabel value="Celular:*" style="font-weight:bold" />
+						<p:inputText value="#{optometraManaged.objOptometra.celular}" />
+
+
+						<p:outputLabel value="Teléfono:*" style="font-weight:bold" />
+						<p:inputText value="#{optometraManaged.objOptometra.telefono}" />
+
+						<p:outputLabel value="E-mail:*" style="font-weight:bold" />
+						<p:inputText value="#{optometraManaged.objOptometra.correo}" />
+					</p:panelGrid>
+
+				</p:panel>
+				<p:panel id="PanelDireccion" header="Dirección de Optómetra">
+
+
+					<p:panelGrid columns="2">
+
+						<p:outputLabel for="Direccion" value="Dirección" style="font-weight:bold"/>
+						<p:inputText id="Direccion"
+							value="#{optometraManaged.objOptometra.direccion}"
+							required="true" label="Dirección" style="width:360px" />
+
+						<p:outputLabel value="Referencia" style="font-weight:bold"/>
+						<p:inputText value="#{optometraManaged.objOptometra.referencia}"
+							style="width:360px" />
+					</p:panelGrid>
+
+
+				</p:panel>
+
+				<p:commandButton value="Actualizar"
+					action="#{optometraManaged.actualizar}"
+					oncomplete="PF('OptDialog').hide()"
+					update=":frmOptometra:panelOptometra" />
+			</h:form>
+		</p:dialog>
+
+
+
+	</ui:define>
+</ui:composition>

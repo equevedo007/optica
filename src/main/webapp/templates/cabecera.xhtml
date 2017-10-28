@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: ADELGADO
+  Date: 5/06/12
+  Time: 17:40
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:panelGrid columnClasses="alignMiddle,alignMiddle,alignBottom"
+		columns="3" border="0"
+		style="background:url(#{request.contextPath}/util/images/principal/fondo-azul.jpg); 
+					 height:100%; 
+					 width:100%;">
+
+		<p:column>
+			<p:graphicImage value="/util/images/principal/logo_tu_optica.jpg"
+				width="150px" style="float:center;width:280px" />
+		</p:column>
+		<p:column>
+		
+		
+			<h:outputText  style="color: white;" />
+			<h:outputText value=" | " style="color: white;" />
+			<p:commandLink action="cambioContrasenaOptometra" value="Cambiar Contraseña"
+				style="color: white;"></p:commandLink>			
+			<h:outputText value=" | " style="color: white;" />
+			
+			<p:separator style="color: white;width:120px"/>
+			
+			<h:outputText id="display" style="color: white;" />
+			<h:outputText value=" | " style="color: white;" />
+			<p:commandLink id="wgCerrarSession" value="Cerrar Sesión"
+				type="button" oncomplete="PF('WVconfirma').show()"  style="color: white;"></p:commandLink>			
+			<h:outputText value=" | " style="color: white;" />
+			
+			
+			
+			
+			
+
+			<p:confirmDialog id="DlgConfirm" header="Cerrar Sesion"  appendTo="@(body)" 
+				widgetVar="WVconfirma" appendToBody="true" modal="true" width="230"
+				height="60" draggable="false" resizable="false" maximizable="false"
+				position="center, center" security="alert"
+				message="Esta seguro de cerrar la sesión."
+				style="position: absolute;">
+				<h:form>
+					<h:panelGrid columns="2">
+						<p:commandButton value="Aceptar" 
+							ajax="false" icon="ui-icon-gear" action="#{sessionManaged.cerrarSession}" />
+
+						<p:commandButton value="Cancelar" type="button"
+							onclick="PF('WVconfirma').hide()" icon="ui-icon-close" />
+					</h:panelGrid>
+				</h:form>
+			</p:confirmDialog>
+		</p:column>
+
+		
+
+	</h:panelGrid>
+</f:view>

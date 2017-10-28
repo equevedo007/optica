@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::0" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="login::#ui#general#login.xhtml"
+    NAME="output" PATH="/ui/general/login.xhtml"
+    TARGET="rules:#ui#general#login.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="bienvenida::#ui#general#bienvenida.xhtml"
+    NAME="output1" PATH="/ui/general/bienvenida.xhtml"
+    TARGET="rules:#ui#general#bienvenida.xhtml" TITLE="bienvenida" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="contacto::#ui#general#contacto.xhtml"
+    NAME="output2" PATH="/ui/general/contacto.xhtml"
+    TARGET="rules:#ui#general#contacto.xhtml" TITLE="contacto" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="consultarCliente::#ui#cliente#consultarCliente.xhtml"
+    NAME="output3" PATH="/ui/cliente/consultarCliente.xhtml"
+    TARGET="rules:#ui#cliente#consultarCliente.xhtml"
+    TITLE="consultarCliente" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="mantenimientoCliente::#ui#cliente#mantenimientoCliente.xhtml"
+    NAME="output4" PATH="/ui/cliente/mantenimientoCliente.xhtml"
+    TARGET="rules:#ui#cliente#mantenimientoCliente.xhtml"
+    TITLE="mantenimientoCliente" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="registrarCliente::#ui#cliente#registrarCliente.xhtml"
+    NAME="output5" PATH="/ui/cliente/registrarCliente.xhtml"
+    TARGET="rules:#ui#cliente#registrarCliente.xhtml"
+    TITLE="registrarCliente" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="ReportedeHistorias::#ui#reportes#ReportedeHistorias.xhtml"
+    NAME="output6" PATH="/ui/reportes/ReportedeHistorias.xhtml"
+    TARGET="rules:#ui#reportes#ReportedeHistorias.xhtml"
+    TITLE="ReportedeHistorias" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="generarHistoria::#ui#historial#generarHistoria.xhtml"
+    NAME="output7" PATH="/ui/historial/generarHistoria.xhtml"
+    TARGET="rules:#ui#historial#generarHistoria.xhtml"
+    TITLE="generarHistoria" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="consultarHistoria::#ui#historial#consultarHistoria.xhtml"
+    NAME="output8" PATH="/ui/historial/consultarHistoria.xhtml"
+    TARGET="rules:#ui#historial#consultarHistoria.xhtml"
+    TITLE="consultarHistoria" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="reporteProximoControl::#ui#reportes#reporteProximoControl.xhtml"
+    NAME="output9" PATH="/ui/reportes/reporteProximoControl.xhtml"
+    TARGET="rules:#ui#reportes#reporteProximoControl.xhtml"
+    TITLE="reporteProximoControl" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="registrarOptometra::#ui#optometra#registrarOptometra.xhtml"
+    NAME="output10" PATH="/ui/optometra/registrarOptometra.xhtml"
+    TARGET="rules:#ui#optometra#registrarOptometra.xhtml"
+    TITLE="registrarOptometra" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="consultarOptometra::#ui#optometra#consultarOptometra.xhtml"
+    NAME="output11" PATH="/ui/optometra/consultarOptometra.xhtml"
+    TARGET="rules:#ui#optometra#consultarOptometra.xhtml"
+    TITLE="consultarOptometra" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="mantenimientoOptometra::#ui#optometra#mantenimientoOptometra.xhtml"
+    NAME="output12" PATH="/ui/optometra/mantenimientoOptometra.xhtml"
+    TARGET="rules:#ui#optometra#mantenimientoOptometra.xhtml"
+    TITLE="mantenimientoOptometra" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="cambioContrasenaOptometra::#ui#optometra#cambioContrasenaOptometra.xhtml"
+    NAME="output13" PATH="/ui/optometra/cambioContrasenaOptometra.xhtml"
+    TARGET="rules:#ui#optometra#cambioContrasenaOptometra.xhtml"
+    TITLE="cambioContrasenaOptometra" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="RealizarVenta::#ui#ventas#RealizarVenta.xhtml" NAME="output14"
+    PATH="/ui/ventas/RealizarVenta.xhtml"
+    TARGET="rules:#ui#ventas#RealizarVenta.xhtml" TITLE="RealizarVenta" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#ui#cliente#consultarCliente.xhtml"
+  PATH="/ui/cliente/consultarCliente.xhtml" SHAPE="304,753,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#ui#cliente#mantenimientoCliente.xhtml"
+  PATH="/ui/cliente/mantenimientoCliente.xhtml" SHAPE="304,865,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#ui#optometra#consultarOptometra.xhtml"
+  PATH="/ui/optometra/consultarOptometra.xhtml" SHAPE="304,1649,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#ui#cliente#registrarCliente.xhtml"
+  PATH="/ui/cliente/registrarCliente.xhtml" SHAPE="304,977,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#ui#optometra#registrarOptometra.xhtml"
+  PATH="/ui/optometra/registrarOptometra.xhtml" SHAPE="304,1537,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#ui#general#bienvenida.xhtml"
+  PATH="/ui/general/bienvenida.xhtml" SHAPE="400,280,50,25" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#ui#reportes#reporteProximoControl.xhtml"
+  PATH="/ui/reportes/reporteProximoControl.xhtml" SHAPE="304,1425,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#ui#historial#consultarHistoria.xhtml"
+  PATH="/ui/historial/consultarHistoria.xhtml" SHAPE="304,1313,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#ui#general#login.xhtml"
+  PATH="/ui/general/login.xhtml" SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#ui#general#contacto.xhtml"
+  PATH="/ui/general/contacto.xhtml" SHAPE="304,641,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#ui#historial#generarHistoria.xhtml"
+  PATH="/ui/historial/generarHistoria.xhtml" SHAPE="304,1201,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#ui#optometra#mantenimientoOptometra.xhtml"
+  PATH="/ui/optometra/mantenimientoOptometra.xhtml" SHAPE="304,1761,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#ui#reportes#ReportedeHistorias.xhtml"
+  PATH="/ui/reportes/ReportedeHistorias.xhtml" SHAPE="304,1089,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#ui#optometra#cambioContrasenaOptometra.xhtml"
+  PATH="/ui/optometra/cambioContrasenaOptometra.xhtml"
+  SHAPE="304,1816,50,25" model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#ui#ventas#RealizarVenta.xhtml"
+  PATH="/ui/ventas/RealizarVenta.xhtml" SHAPE="304,593,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>

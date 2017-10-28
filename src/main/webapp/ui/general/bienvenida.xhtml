@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: ADELGADO
+  Date: 6/06/12
+  Time: 17:47
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="/templates/Master.xhtml">
+		<ui:define name="contenido">
+		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+			<h:panelGrid cellpadding="0" cellspacing="0" width="100%" border="0">
+				<p:column>
+					<p:graphicImage value="/util/images/principal/fondo2.png"
+						style="float:left;width:100%" />
+				</p:column>
+			</h:panelGrid>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

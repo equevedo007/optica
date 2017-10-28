@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: ADELGADO
+  Date: 6/06/12
+  Time: 17:40
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<f:view contentType="text/html">
+	<h:head>
+	<link type="text/css" rel="stylesheet"
+			href="#{request.contextPath}/css/default.css" />
+
+		<link type="text/css" rel="stylesheet"
+			href="#{request.contextPath}/css/syntaxhighlighter/syntaxhighlighter.css" />
+		<f:facet name="first">
+			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+
+			<meta http-equiv="Pragma" content="No-cache" />
+			<meta http-equiv="Cache-Control"
+				content="no-store,No-cache,must-revalidate,post-check=0,pre-check=0,max-age=0" />
+			<meta http-equiv="Expires" content="-1" />
+			<title>ValeraVision</title>
+		</f:facet>
+		<link href="#{request.contextPath}/util/css/estilos.css"
+			rel="stylesheet" type="text/css" />
+		<link href="#{request.contextPath}/util/images/icon/logo_sat.ico"
+			type="image/x-icon" rel="shortcut icon" />
+
+		<script>
+			<!--
+			var nav = navigator.appName.toLowerCase();
+			var name = navigator.userAgent.toLowerCase();
+			
+			if(nav.indexOf("netscape")>=0){
+				if(navigator.userAgent.toLowerCase().indexOf("chrome")>=0){
+					var _width=0-100;
+				}else if(navigator.userAgent.toLowerCase().indexOf("firefox")>=0){
+					var _width =  screen.width;
+						window.onresize = function(event) {
+						  _width =  (window.innerWidth || document.body.clientWidth);
+						}
+				}
+			}else if(nav.indexOf("explorer")>=0){
+					var _width=0-100;
+			}else{
+				alert("navegador no soportado.");
+			}
+			//-->
+			//var _width = $(window).innerWidth();
+		</script>
+		
+	</h:head>
+
+	<h:body>
+		<p:layout fullPage="true">
+			<p:layoutUnit position="north" size="90" resizable="false"
+				closable="false" collapsible="false">
+				<h:panelGrid columns="3" border="0"
+					columnClasses="alignMiddle,alignMiddle,alignBottom"
+					style="background:url(#{request.contextPath}/util/images/principal/fondo-azul.jpg); 
+				 height:100%; 
+				 width:100%;">
+					
+					
+					<p:column>
+			<p:graphicImage value="/util/images/principal/logo_V1.jpg"
+				width="150px" style="float:center;width:280px" />
+		</p:column>
+
+				</h:panelGrid>
+			</p:layoutUnit>
+
+			<p:layoutUnit position="center" style="text-align: center;">
+				<h:form id="frmError">
+				
+				<p:panelGrid columns="1">
+					    <p:outputLabel value="Usted no cuenta con los permisos para esta aplicación." style="font-size: 110px;"/>
+						<p:outputLabel value="Por favor comunicarse con el Administrador."/>
+				
+				</p:panelGrid>
+						
+				</h:form>
+			</p:layoutUnit>
+
+			<p:layoutUnit position="south" size="50" resizable="false"
+				closable="false" collapsible="false"
+				style="text-align: center;vertical-align: middle;">
+				<h:panelGrid columns="3" border="0"
+					columnClasses="alignMiddle,alignMiddle,alignBottom"
+					style="background:url(#{request.contextPath}/util/images/principal/fondo-azul.jpg); 
+				 height:100%; 
+				 width:100%;">
+					
+				</h:panelGrid>
+			</p:layoutUnit>
+		</p:layout>
+
+	</h:body>
+</f:view>
+</html>

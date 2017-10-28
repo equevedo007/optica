@@ -1,0 +1,469 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/Master.xhtml"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<ui:define name="contenido">
+		<style>
+.ui-spinner-input {
+	margin-right: 20px !important;
+}
+</style>
+
+
+
+		<h:form id="frmHistorial">
+			<p:panel id="panelCliente" header="Historial Óptico"
+				style="width:1250px">
+				<p:growl id="growl" showDetail="true" sticky="true" />
+				<p:panelGrid columns="2">
+					<p:panel header="Datos del Paciente" style="width:1000px">
+
+					<p:panelGrid columns="10">
+						<p:outputLabel value="Nombres y Apellidos"
+							style="font-weight:bold" />
+						<p:inputText value="#{Historial.objClienteBean.nombres_apellidos}"
+							style="width:250px" disabled="true" />
+
+						<p:outputLabel value="Ocupación" style="font-weight:bold" />
+						<p:inputText value="#{Historial.objClienteBean.ocupacion}"
+							disabled="true" />
+
+						<p:outputLabel value="Edad" style="font-weight:bold" />
+						<p:inputText value="#{Historial.edad}" style="width:40px"
+							disabled="true" />
+
+
+
+						<p:outputLabel value="Buscar" style="font-weight:bold" />
+						<p:commandLink onclick="PF('dialogCliente').show();">
+							<p:graphicImage value="/util/images/icons/buscar.png"
+								width="10px" style="float:center;width:30px" />
+						</p:commandLink>
+					</p:panelGrid>
+				</p:panel>
+				
+				<p:panel header="Fecha de Registro" style="width:220pxpx">
+					
+					<p:calendar  value="#{Historial.objHistorialmedico.fechaRegistro}"
+					locale="de" navigator="true" pattern="dd-MM-yyyy"  disabled="#{Historial.habiliar_historia}" 
+					label="Fecha de Registro"/>
+					
+				</p:panel>
+				
+				</p:panelGrid>
+				<br />
+
+
+				<p:panel header="Datos de la Historia" style="width:100%" border="0">
+
+
+					<p:panelGrid id="panelAgudeza" columns="2" border="0">
+						<p:panel header="AGUDEZA VISUAL" style="width:501px" border="0">
+							<p:panelGrid columns="4" border="0">
+								<p:panel style="width:60px;text-align:center;font-weight:bold"
+									header="VISTA" border="0">
+									<p:panelGrid columns="1" border="0">
+										<p:outputLabel value="O.D"
+											style="wheight:120px;font-weight:bold" />
+										<p:outputLabel value="O.I"
+											style="wheight:120px;font-weight:bold" />
+									</p:panelGrid>
+								</p:panel>
+
+
+								<p:panel header="S.C"
+									style="font-weight:bold;text-align:center;width:100px">
+
+									<p:selectOneMenu
+										value="#{Historial.objHistorialmedico.agudezaODSC}"
+										style="width:40%" disabled="#{Historial.habiliar_historia}" >
+										<f:selectItem itemLabel="" itemValue="-Seleccione-" />
+										<f:selectItem itemLabel="20/200" itemValue="20/200" />
+										<f:selectItem itemLabel="20/100" itemValue="20/100" />
+										<f:selectItem itemLabel="20/70" itemValue="20/70" />
+										<f:selectItem itemLabel="20/50" itemValue="20/50" />
+										<f:selectItem itemLabel="20/40" itemValue="20/40" />
+										<f:selectItem itemLabel="20/30" itemValue="20/30" />
+										<f:selectItem itemLabel="20/25" itemValue="20/25" />
+										<f:selectItem itemLabel="20/20" itemValue="20/20" />
+									</p:selectOneMenu>
+									<p:selectOneMenu
+										value="#{Historial.objHistorialmedico.agudezaOISC}"
+										style="width:40%" disabled="#{Historial.habiliar_historia}">
+										<f:selectItem itemLabel="" itemValue="-Seleccione-" />
+										<f:selectItem itemLabel="20/200" itemValue="20/200" />
+										<f:selectItem itemLabel="20/100" itemValue="20/100" />
+										<f:selectItem itemLabel="20/70" itemValue="20/70" />
+										<f:selectItem itemLabel="20/50" itemValue="20/50" />
+										<f:selectItem itemLabel="20/40" itemValue="20/40" />
+										<f:selectItem itemLabel="20/30" itemValue="20/30" />
+										<f:selectItem itemLabel="20/25" itemValue="20/25" />
+										<f:selectItem itemLabel="20/20" itemValue="20/20" />
+									</p:selectOneMenu>
+								</p:panel>
+
+								<p:panel header="P.H"
+									style="font-weight:bold;text-align:center;width:100px">
+									<p:selectOneMenu
+										value="#{Historial.objHistorialmedico.agudezaODPH}"
+										style="width:40%" disabled="#{Historial.habiliar_historia}">
+										<f:selectItem itemLabel="" itemValue="-Seleccione-" />
+										<f:selectItem itemLabel="20/200" itemValue="20/200" />
+										<f:selectItem itemLabel="20/100" itemValue="20/100" />
+										<f:selectItem itemLabel="20/70" itemValue="20/70" />
+										<f:selectItem itemLabel="20/50" itemValue="20/50" />
+										<f:selectItem itemLabel="20/40" itemValue="20/40" />
+										<f:selectItem itemLabel="20/30" itemValue="20/30" />
+										<f:selectItem itemLabel="20/25" itemValue="20/25" />
+										<f:selectItem itemLabel="20/20" itemValue="20/20" />
+									</p:selectOneMenu>
+									<p:selectOneMenu
+										value="#{Historial.objHistorialmedico.agudezaOIPH}"
+										style="width:40%" disabled="#{Historial.habiliar_historia}">
+										<f:selectItem itemLabel="" itemValue="-Seleccione-" />
+										<f:selectItem itemLabel="20/200" itemValue="20/200" />
+										<f:selectItem itemLabel="20/100" itemValue="20/100" />
+										<f:selectItem itemLabel="20/70" itemValue="20/70" />
+										<f:selectItem itemLabel="20/50" itemValue="20/50" />
+										<f:selectItem itemLabel="20/40" itemValue="20/40" />
+										<f:selectItem itemLabel="20/30" itemValue="20/30" />
+										<f:selectItem itemLabel="20/25" itemValue="20/25" />
+										<f:selectItem itemLabel="20/20" itemValue="20/20" />
+									</p:selectOneMenu>
+								</p:panel>
+
+
+								<p:panel header="C.C"
+									style="font-weight:bold;text-align:center;width:100px">
+									<p:selectOneMenu
+										value="#{Historial.objHistorialmedico.agudezaODCC}"
+										style="width:40%" disabled="#{Historial.habiliar_historia}">
+										<f:selectItem itemLabel="" itemValue="-Seleccione-" />
+										<f:selectItem itemLabel="20/200" itemValue="20/200" />
+										<f:selectItem itemLabel="20/100" itemValue="20/100" />
+										<f:selectItem itemLabel="20/70" itemValue="20/70" />
+										<f:selectItem itemLabel="20/50" itemValue="20/50" />
+										<f:selectItem itemLabel="20/40" itemValue="20/40" />
+										<f:selectItem itemLabel="20/30" itemValue="20/30" />
+										<f:selectItem itemLabel="20/25" itemValue="20/25" />
+										<f:selectItem itemLabel="20/20" itemValue="20/20" />
+									</p:selectOneMenu>
+									<p:selectOneMenu
+										value="#{Historial.objHistorialmedico.agudezaOICC}"
+										style="width:40%" disabled="#{Historial.habiliar_historia}">
+										<f:selectItem itemLabel="" itemValue="-Seleccione-" />
+										<f:selectItem itemLabel="20/200" itemValue="20/200" />
+										<f:selectItem itemLabel="20/100" itemValue="20/100" />
+										<f:selectItem itemLabel="20/70" itemValue="20/70" />
+										<f:selectItem itemLabel="20/50" itemValue="20/50" />
+										<f:selectItem itemLabel="20/40" itemValue="20/40" />
+										<f:selectItem itemLabel="20/30" itemValue="20/30" />
+										<f:selectItem itemLabel="20/25" itemValue="20/25" />
+										<f:selectItem itemLabel="20/20" itemValue="20/20" />
+									</p:selectOneMenu>
+
+								</p:panel>
+
+
+							</p:panelGrid>
+
+						</p:panel>
+						<p:panel header="ANTEOJOS EN USO"
+							style="width:100%;wheight:60px;xfont-weight:bold">
+							<p:panelGrid columns="7" border="0">
+								<p:panel
+									style="width:100%;wheight:80px;text-align:center;font-weight:bold"
+									header="VISTA">
+									<p:panelGrid columns="1">
+										<p:outputLabel value="O.D"
+											style="wheight:80px;font-weight:bold" />
+										<p:outputLabel value="O.I"
+											style="wheight:80px;font-weight:bold" />
+									</p:panelGrid>
+								</p:panel>
+
+								<p:panel header="ESF."
+									style="width:80%;wheight:80px;text-align:center;font-weight:bold">
+									<p:panelGrid columns="0">
+										<p:spinner
+											value="#{Historial.objHistorialmedico.anteojosenUsoODESF}"
+											stepFactor="0.25" size="1" max="20"
+											disabled="#{Historial.spinner_ANTEOJOS_EN_USO}" />
+										<p:spinner
+											value="#{Historial.objHistorialmedico.anteojosenUsoOIESF}"
+											stepFactor="0.25" size="1" max="20"
+											disabled="#{Historial.spinner_ANTEOJOS_EN_USO}" />
+									</p:panelGrid>
+								</p:panel>
+								<p:panel header="CIL."
+									style="width:80%;wheight:80px;text-align:center;font-weight:bold">
+									<p:panelGrid columns="0">
+										<p:spinner
+											value="#{Historial.objHistorialmedico.anteojosenUsoODCIL}"
+											stepFactor="0.25" size="1" max="0"
+											disabled="#{Historial.spinner_ANTEOJOS_EN_USO}" >
+											<p:ajax listener="#{Historial.ActivarEje_AnteojoEnUso_OD}" update="anteojosenUsoODEJE"/>
+										</p:spinner>	
+											
+										<p:spinner
+											value="#{Historial.objHistorialmedico.anteojosenUsoOICIL}"
+											stepFactor="0.25" size="1" max="0"
+											disabled="#{Historial.spinner_ANTEOJOS_EN_USO}"  >
+										
+										<p:ajax listener="#{Historial.ActivarEje_AnteojoEnUso_OI}" update="anteojosenUsoOIEJE"/>
+									</p:spinner>		
+									</p:panelGrid>
+								</p:panel>
+								<p:panel header="EJE."
+									style="width:80%;wheight:80px;text-align:center;font-weight:bold">
+									<p:panelGrid columns="0">
+									
+										<p:spinner id="anteojosenUsoODEJE"
+											value="#{Historial.objHistorialmedico.anteojosenUsoODEJE}"
+											stepFactor="5" size="1" max="180" min="0"
+											disabled="#{Historial.spinner_ANTEOJOS_FINAL_EJE_OD}" />
+											
+										<p:spinner id="anteojosenUsoOIEJE"
+											value="#{Historial.objHistorialmedico.anteojosenUsoOIEJE}"
+											stepFactor="5" size="1" max="180" min="0"
+											disabled="#{Historial.spinner_ANTEOJOS_FINAL_EJE_OI}" />
+									</p:panelGrid>
+								</p:panel>
+
+								<p:panel header="ADD."
+									style="width:80%;wheight:80px;text-align:center;font-weight:bold">
+									<p:panelGrid columns="0">
+										<p:spinner
+											value="#{Historial.objHistorialmedico.anteojosenUsoODADD}"
+											stepFactor="0.25" size="1" max="3.5" min="0"
+											disabled="#{Historial.spinner_ANTEOJOS_EN_USO}" />
+										<p:spinner
+											value="#{Historial.objHistorialmedico.anteojosenUsoOIADD}"
+											stepFactor="0.25" size="1" max="3.5" min="0"
+											disabled="#{Historial.spinner_ANTEOJOS_EN_USO}" />
+									</p:panelGrid>
+								</p:panel>
+
+							</p:panelGrid>
+
+
+						</p:panel>
+					</p:panelGrid>
+					<br />
+
+					<p:panelGrid columns="2">
+						<p:panel header="REFRACCIÓN FINAL"
+							style="wheight:60px;xfont-weight:bold">
+							<p:panelGrid columns="7" border="0">
+								<p:panel
+									style="width:100%;wheight:140px;text-align:center;font-weight:bold"
+									header="VISTA">
+									<p:panelGrid columns="1">
+										<p:outputLabel value="O.D"
+											style="wheight:120px;font-weight:bold" />
+										<p:outputLabel value="O.I"
+											style="wheight:120px;font-weight:bold" />
+									</p:panelGrid>
+								</p:panel>
+
+								<p:panel header="ESF."
+									style="wheight:50px;text-align:center;font-weight:bold">
+									<p:panelGrid columns="1">
+										<p:spinner
+											value="#{Historial.objHistorialmedico.refracicionFinalODESF}"
+											stepFactor="0.25" size="1" max="20" disabled="#{Historial.habiliar_historia}">
+										</p:spinner>
+
+										<p:spinner
+											value="#{Historial.objHistorialmedico.refracicionFinalOIESF}"
+											stepFactor="0.25" size="1" max="20" disabled="#{Historial.habiliar_historia}" />
+									</p:panelGrid>
+								</p:panel>
+								<p:panel header="CIL."
+									style="wheight:50px;text-align:center;font-weight:bold">
+									<p:panelGrid columns="1">
+
+										<p:spinner
+											value="#{Historial.objHistorialmedico.refracicionFinalODCIL}"
+											stepFactor="0.25" size="1" max="0" disabled="#{Historial.habiliar_historia}">
+											<p:ajax listener="#{Historial.ActivarEje_OD}"
+												update="spinnerEjeODEJE" />
+										</p:spinner>
+
+										<p:spinner
+											value="#{Historial.objHistorialmedico.refracicionFinalOICIL}"
+											stepFactor="0.25" size="1" max="0" disabled="#{Historial.habiliar_historia}">
+											<p:ajax listener="#{Historial.ActivarEje_OI}"
+												update="spinnerEjeOIEJE" />
+										</p:spinner>
+
+
+									</p:panelGrid>
+								</p:panel>
+								<p:panel header="EJE."
+									style="wheight:50px;text-align:center;font-weight:bold">
+									<p:panelGrid columns="1">
+										<p:spinner id="spinnerEjeODEJE"
+											value="#{Historial.objHistorialmedico.refracicionFinalODEJE}"
+											stepFactor="5" size="1" max="180" min="0"
+											disabled="#{Historial.spinner_REFRACCION_FINAL_EJE_OD}" />
+
+										<p:spinner id="spinnerEjeOIEJE"
+											value="#{Historial.objHistorialmedico.refracicionFinalOIEJE}"
+											stepFactor="5" size="1" max="180" min="0"
+											disabled="#{Historial.spinner_REFRACCION_FINAL_EJE_OI}" />
+
+									</p:panelGrid>
+								</p:panel>
+								<p:panel header="PD."
+									style="wheight:50px;text-align:center;font-weight:bold">
+									<p:panelGrid columns="1">
+										<p:inputText
+											value="#{Historial.objHistorialmedico.refracicionFinalODPD}"
+											size="1" disabled="#{Historial.habiliar_historia}"/>
+										<p:inputText
+											value="#{Historial.objHistorialmedico.refracicionFinalOIPD}"
+											size="1" disabled="#{Historial.habiliar_historia}"/>
+
+									</p:panelGrid>
+								</p:panel>
+								<p:panel header="ADD"
+									style="wheight:50px;text-align:center;font-weight:bold">
+									<p:panelGrid columns="1">
+										<p:spinner
+											value="#{Historial.objHistorialmedico.refracicionFinalODADD}"
+											stepFactor="0.25" size="1" max="3.5" min="0" disabled="#{Historial.habiliar_historia}"/>
+										<p:spinner
+											value="#{Historial.objHistorialmedico.refracicionFinalOIADD}"
+											stepFactor="0.25" size="1" max="3.5" min="0" disabled="#{Historial.habiliar_historia}"/>
+									</p:panelGrid>
+								</p:panel>
+
+							</p:panelGrid>
+
+
+						</p:panel>
+
+						<p:panel header="Próximo Control" style="width:300px">
+
+							<p:panelGrid columns="3"  cellpadding="5" >
+								<p:selectOneRadio id="console" layout="grid" columns="1" value="#{Historial.proximoControl}" disabled="#{Historial.habiliar_historia}">
+									<f:selectItem itemLabel="6 Meses" itemValue="6" />
+									<f:selectItem itemLabel="8 Meses" itemValue="8" />
+									<f:selectItem itemLabel="12 Meses" itemValue="12" />
+								</p:selectOneRadio>
+							</p:panelGrid>
+						</p:panel>
+
+					</p:panelGrid>
+
+					<br />
+
+					<p:panelGrid columns="2" border="0">
+						<p:panel header="OBSERVACIONES" style="width:551px">
+							<p:inputTextarea
+								value="#{Historial.objHistorialmedico.observaciones}"
+								style="width:500px;height:100px" disabled="#{Historial.habiliar_historia}"/>
+						</p:panel>
+						<p:panel header="COMENTARIOS" style="width:551px">
+							<p:inputTextarea
+								value="#{Historial.objHistorialmedico.comentarios}"
+								style="width:500px;height:100px" disabled="#{Historial.habiliar_historia}"/>
+						</p:panel>
+					</p:panelGrid>
+
+				</p:panel>
+				<p:commandButton value="Registrar"
+					action="#{Historial.RegistarHistoria}" update="frmHistorial,growl" validateClient="true" disabled="#{Historial.habiliar_historia}"/>
+			</p:panel>
+		</h:form>
+
+		<p:dialog widgetVar="dialogCliente" modal="true" showEffect="explode"
+			hideEffect="explode" resizable="false" appendTo="@(body)"
+			width="1024px">
+			<h:form id="frmDialogo">
+				<p:panel id="panel" header="Buscar de Cliente">
+					<p:panelGrid columns="6">
+
+						<p:outputLabel value="Ingrese Nombres y Apellidos:*" />
+						<p:inputText value="#{Historial.nombres}" />
+
+						<p:outputLabel id="txtNombres" value="Ingrese el Numero de DNI:*" />
+						<p:inputText value="#{Historial.dni}" />
+
+
+						<p:commandButton value="Buscar"
+							actionListener="#{Historial.buscarCliente}" update="tablaCliente">
+						</p:commandButton>
+					</p:panelGrid>
+				</p:panel>
+				<p:panel id="tablaCliente">
+					<p:dataTable value="#{Historial.lista}" var="c" scrollable="true"
+						scrollHeight="150">
+
+						<f:facet name="header">
+							<p:outputLabel value="Consultar Cliente" />
+						</f:facet>
+						<p:column headerText="Primer Nombre" style="font-weight:bold">
+							<p:outputLabel value="#{c.nombre1}" style="font-weight:bold" />
+						</p:column>
+
+						<p:column headerText="Segundo Nombre" style="font-weight:bold">
+							<p:outputLabel value="#{c.nombre2}" style="font-weight:bold" />
+						</p:column>
+
+						<p:column headerText="Apellido Paterno" style="font-weight:bold">
+							<p:outputLabel value="#{c.apellidop}" style="font-weight:bold" />
+						</p:column>
+
+						<p:column headerText="Apellido Materno" style="font-weight:bold">
+							<p:outputLabel value="#{c.apellidom}" style="font-weight:bold" />
+						</p:column>
+
+						<p:column headerText="DNI" style="font-weight:bold">
+							<p:outputLabel value="#{c.dni}" style="font-weight:bold" />
+						</p:column>
+
+						<p:column headerText="Fecha de Nacimiento"
+							style="font-weight:bold">
+							<p:outputLabel value="#{c.fechaNacimiento}">
+								<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+
+							</p:outputLabel>
+						</p:column>
+
+						<p:column headerText="Fecha de Registro" style="font-weight:bold">
+							<p:outputLabel value="#{c.fechaRegistro}">
+								<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+							</p:outputLabel>
+						</p:column>
+
+						<p:column id="txtid" style="width:32px;text-align: center">
+
+							<p:commandLink id="btmbuscar"
+								onclick="PF('dialogCliente').hide();"
+								actionListener="#{Historial.buscarClientecodigo}"
+								icon="ui-icon-search" update=":frmHistorial:panelCliente">
+								<f:attribute name="xid" value="#{c.idCliente}" />
+								<p:graphicImage value="/util/images/icons/Select01.png"
+									width="8px" style="float:center;width:25px" />
+							</p:commandLink>
+
+
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+			</h:form>
+		</p:dialog>
+
+
+
+
+
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,427 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" 
+	template="/templates/Master.xhtml"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<ui:define name="contenido">
+		<h:form id="frmDetalle">
+			<p:panel id="pnlBuscarCliente" header="Buscar de Cliente">
+			<p:growl id="growl" showDetail="true" sticky="true" /> 
+				<p:panelGrid columns="6">
+
+					<p:outputLabel value="Ingrese Nombres y Apellidos:*" />
+					<p:inputText value="#{Historial.objClienteBean.nombres_apellidos}"  style="width:260px"  disabled="true"/>
+
+
+					<p:outputLabel value="Ingrese el Numero de DNI:*" />
+					<p:inputText value="#{Historial.objClienteBean.dni}"  disabled="true"/>
+					
+					<p:commandLink onclick="PF('dialogCliente').show();" update="panelLista">
+						<p:graphicImage value="/util/images/icons/buscar.png" width="10px"
+							style="float:center;width:30px" />
+					</p:commandLink>
+
+				</p:panelGrid>
+			</p:panel>
+				
+			<p:panel id="panelLista" header="Lista de Historias Registradas">
+			
+				<p:dataTable value="#{Historial.listaDetalle}" var="h">
+					
+					<p:column headerText="Código Historia">
+						<p:outputLabel value="#{h.idHistorial}"/>
+					</p:column>
+
+					<p:column headerText="Paciente">
+						<p:outputLabel value="#{h.cliente}" />
+					</p:column>
+
+					<p:column headerText="Optómetra">
+						<p:outputLabel value="#{h.optometra}" />
+					</p:column>
+
+					<p:column headerText="Fecha">
+						<p:outputLabel value="#{h.fecha}">
+							<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+						</p:outputLabel>
+					</p:column>
+
+					<p:column headerText="Local">
+						<p:outputLabel value="#{h.local}" />
+					</p:column>
+
+					<p:column headerText="Ver Historia">
+					
+						<p:commandLink  title="Ver"
+							actionListener="#{Historial.BuscarHistoria}"
+							oncomplete="PF('dialogoHistorial').show()" update="tblHistorial,pnlCliente">
+							<f:attribute name="idHistoria" value="#{h.idHistorial}" />
+							<f:attribute name="xid" value="#{h.idCliente}" />
+							<p:graphicImage value="/util/images/icons/viewer.png" width="8px"
+							style="float:center;width:25px" />
+						</p:commandLink>
+					</p:column>
+				
+					<p:column headerText="Exportar Historia">
+						
+						<p:commandLink title="Exportar" actionListener="#{Historial.exportarPDF}"
+						 ajax="false" >
+						
+						
+						
+						<f:attribute name="idHistoria" value="#{h.idHistorial}" />
+						<f:attribute name="xid" value="#{h.idCliente}" />
+						<p:graphicImage value="/util/images/icons/pdf.jpg" width="8px"
+							style="float:center;width:25px" />
+						</p:commandLink>
+						
+					 
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+
+		<p:dialog widgetVar="dialogoHistorial"
+			modal="true" showEffect="explode" hideEffect="explode"
+			resizable="false" appendTo="@(body)" >
+			
+			<p:panel id="pnlCliente" header="Datos del Paciente" style="width:100%;text-align: center" >
+			
+				<p:panelGrid columns="10">
+						<p:outputLabel value="Nombres y Apellidos"
+							style="font-weight:bold" />
+						<p:inputText value="#{Historial.objClienteBean.nombres_apellidos}"
+							style="width:250px" disabled="true"/>
+
+						<p:outputLabel value="Ocupación" style="font-weight:bold" />
+						<p:inputText value="#{Historial.objClienteBean.ocupacion}" disabled="true"/>
+
+						<p:outputLabel value="Edad" style="font-weight:bold" />
+						<p:inputText value="#{Historial.edad}" style="width:40px" disabled="true"/>
+
+						
+							
+
+						<p:outputLabel value="Fecha de Registro" style="font-weight:bold" />
+						
+						
+						<p:inputText value="#{Historial.fechaHistoria}" disabled="true">
+							<f:convertDateTime type="date" pattern="dd-MM-yyyy"  />
+						</p:inputText>
+					</p:panelGrid>
+				
+			</p:panel>
+
+		<p:panel id="tblHistorial" header="Datos del historial Óptico" style="width:100%;text-align: center" >
+		
+			<div >
+				
+				<p:panelGrid id="panelAgudeza" columns="2" border="0">
+						<p:panel header="AGUDEZA VISUAL" style="width:551px" border="0">
+							<p:panelGrid columns="4" border="0">
+								<p:panel style="width:60px;text-align:center;font-weight:bold"
+									header="VISTA" border="0">
+									<p:panelGrid columns="1" border="0">
+										<p:outputLabel value="O.D"
+											style="wheight:120px;font-weight:bold" />
+										<p:outputLabel value="O.I"
+											style="wheight:120px;font-weight:bold" />
+									</p:panelGrid>
+								</p:panel>
+
+
+								<p:panel header="S.C"
+									style="font-weight:bold;text-align:center;width:80px">
+									
+									<p:panelGrid columns="1" cellpadding="5">
+										<p:outputLabel
+										value="#{Historial.objHistorialmedico.agudezaODSC}"
+										size="6" />
+										
+									<p:outputLabel
+										value="#{Historial.objHistorialmedico.agudezaOISC}"
+										size="6"/>
+									
+									</p:panelGrid>
+								
+								</p:panel>
+
+								<p:panel header="P.H"
+									style="font-weight:bold;text-align:center;width:80px">
+									
+									<p:panelGrid columns="1" cellpadding="5">
+										<p:outputLabel
+										value="#{Historial.objHistorialmedico.agudezaODPH}"
+										size="6" />
+										
+									<p:outputLabel
+										value="#{Historial.objHistorialmedico.agudezaOIPH}"
+										size="6"/>
+									
+									</p:panelGrid>
+									
+								</p:panel>
+
+
+								<p:panel header="C.C"
+									style="font-weight:bold;text-align:center;width:80px">
+									
+									<p:panelGrid columns="1" cellpadding="5">
+										<p:outputLabel
+										value="#{Historial.objHistorialmedico.agudezaODCC}"
+										size="6" />
+										
+									<p:outputLabel
+										value="#{Historial.objHistorialmedico.agudezaOICC}"
+										size="6"/>
+									
+									</p:panelGrid>
+
+								</p:panel>
+
+
+							</p:panelGrid>
+
+						</p:panel>
+						<p:panel header="ANTEOJOS EN USO" style="width:96%;wheight:90px;xfont-weight:bold">
+						<p:panelGrid columns="7" border="0" >
+							<p:panel
+								style="width:100%;wheight:80px;text-align:center;font-weight:bold"
+								header="VISTA">
+								<p:panelGrid columns="1">
+									<p:outputLabel value="O.D"
+										style="wheight:80px;font-weight:bold" />
+									<p:outputLabel value="O.I"
+										style="wheight:80px;font-weight:bold" />
+								</p:panelGrid>
+							</p:panel>
+
+							<p:panel header="ESF."
+								style="width:80%;wheight:80px;text-align:center;font-weight:bold">
+								<p:panelGrid columns="1">
+									<p:outputLabel value="#{Historial.objHistorialmedico.anteojosenUsoODESF}"/>
+									<p:outputLabel value="#{Historial.objHistorialmedico.anteojosenUsoOIESF}"/>
+								</p:panelGrid>
+							</p:panel>
+							<p:panel header="CIL."
+								style="width:80%;wheight:80px;text-align:center;font-weight:bold">
+								<p:panelGrid columns="1">
+									<p:outputLabel value="#{Historial.objHistorialmedico.anteojosenUsoODCIL}" />
+									<p:outputLabel value="#{Historial.objHistorialmedico.anteojosenUsoOICIL}"/>
+								</p:panelGrid>
+							</p:panel>
+							<p:panel header="EJE."
+								style="width:80%;wheight:80px;text-align:center;font-weight:bold">
+								<p:panelGrid columns="1">
+									<p:outputLabel value="#{Historial.objHistorialmedico.anteojosenUsoODEJE}" />
+									<p:outputLabel value="#{Historial.objHistorialmedico.anteojosenUsoOIEJE}" />
+								</p:panelGrid>
+							</p:panel>
+							
+							<p:panel header="ADD."
+								style="width:80%;wheight:80px;text-align:center;font-weight:bold">
+								<p:panelGrid columns="1">
+									<p:outputLabel value="#{Historial.objHistorialmedico.anteojosenUsoODADD}" />
+									<p:outputLabel value="#{Historial.objHistorialmedico.anteojosenUsoOIADD}" />
+								</p:panelGrid>
+							</p:panel>
+
+						</p:panelGrid>
+
+
+					</p:panel>
+					</p:panelGrid>
+					<br />
+
+					<p:panelGrid columns="2">
+						<p:panel header="REFRACCIÓN FINAL" style="width:750px">
+						<p:panelGrid columns="7" border="0">
+							<p:panel
+								style="width:100%;wheight:140px;text-align:center;font-weight:bold"
+								header="VISTA">
+								<p:panelGrid columns="1">
+									<p:outputLabel value="O.D"
+										style="wheight:120px;font-weight:bold" />
+									<p:outputLabel value="O.I"
+										style="wheight:120px;font-weight:bold" />
+								</p:panelGrid>
+							</p:panel>
+
+							<p:panel header="ESF."
+								style="width:100%;text-align:center;font-weight:bold">
+								<p:panelGrid columns="1">
+									
+									<p:outputLabel value="#{Historial.objHistorialmedico.refracicionFinalODESF}"/>
+										
+									
+									<p:outputLabel value="#{Historial.objHistorialmedico.refracicionFinalOIESF}"/>
+										
+								</p:panelGrid>
+							</p:panel>
+							<p:panel header="CIL."
+								style="width:100%;text-align:center;font-weight:bold">
+								<p:panelGrid columns="1">
+									
+										
+									<p:outputLabel value="#{Historial.objHistorialmedico.refracicionFinalODCIL}"/>
+										
+									<p:outputLabel value="#{Historial.objHistorialmedico.refracicionFinalOICIL}"/>
+									
+									
+								</p:panelGrid>
+							</p:panel>
+							<p:panel header="EJE."
+								style="width:100%;text-align:center;font-weight:bold">
+								<p:panelGrid columns="1">
+									<p:outputLabel	value="#{Historial.objHistorialmedico.refracicionFinalODEJE}"/>
+									<p:outputLabel value="#{Historial.objHistorialmedico.refracicionFinalOIEJE}"/>
+								</p:panelGrid>
+							</p:panel>
+							<p:panel header="PD."
+								style="width:100%;text-align:center;font-weight:bold">
+								<p:panelGrid columns="1">
+									<p:outputLabel
+										value="#{Historial.objHistorialmedico.refracicionFinalODPD}"
+										size="6" />
+									<p:outputLabel
+										value="#{Historial.objHistorialmedico.refracicionFinalOIPD}"
+										size="6" />
+
+								</p:panelGrid>
+							</p:panel>
+							<p:panel header="ADD"
+								style="width:100%;text-align:center;font-weight:bold">
+								<p:panelGrid columns="1">
+									<p:outputLabel value="#{Historial.objHistorialmedico.refracicionFinalODADD}" />
+									<p:outputLabel value="#{Historial.objHistorialmedico.refracicionFinalOIADD}"/>
+								</p:panelGrid>
+							</p:panel>
+
+						</p:panelGrid>
+
+
+					</p:panel>
+					
+					<p:panel header="Próximo Control del Paciente"  style="width:360px">
+						
+						<p:panelGrid columns="2"  layout="grid">
+							<p:outputLabel value="Próximo Control:" style="width:300px;font-weight:bold" />							
+							<p:outputLabel value="#{Historial.objHistorialmedico.fechaProximocontrol}">
+								<f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+							</p:outputLabel>							
+							
+							<p:outputLabel value="Control de :" style="width:300px;font-weight:bold" />
+							<p:outputLabel value="#{Historial.objHistorialmedico.mesesProxControl}  Meses"/>
+							
+							
+						</p:panelGrid>
+					
+					</p:panel>
+					</p:panelGrid>
+					
+					<br />
+					
+					<p:panelGrid columns="2" border="0">
+						<p:panel header="OBSERVACIONES" style="width:551px">
+							<p:inputTextarea
+								value="#{Historial.objHistorialmedico.observaciones}"
+								style="width:500px;height:80px" />
+						</p:panel>
+						<p:panel header="COMENTARIOS" style="width:551px">
+							<p:inputTextarea
+								value="#{Historial.objHistorialmedico.comentarios}"
+								style="width:500px;height:80px" />
+						</p:panel>
+					</p:panelGrid>
+					
+			</div>
+		
+		</p:panel>
+
+		</p:dialog>
+
+		<p:dialog widgetVar="dialogCliente" modal="true" showEffect="explode"
+			hideEffect="explode" resizable="false" appendTo="@(body)"
+			width="1024px" style="width:20%;text-align:center">
+			<h:form id="frmDialogo">
+				<p:panel id="panel" header="Buscar de Cliente">
+					<p:panelGrid columns="6">
+
+						<p:outputLabel value="Ingrese Nombres y Apellidos:*" />
+						<p:inputText value="#{Historial.nombres}" />
+
+						<p:outputLabel id="txtNombres" value="Ingrese el Numero de DNI:*" />
+						<p:inputText value="#{Historial.dni}" />
+
+
+						<p:commandButton value="Buscar"
+							actionListener="#{Historial.buscarCliente}" update="tablaCliente">
+						</p:commandButton>
+					</p:panelGrid>
+				</p:panel>
+				<p:panel id="tablaCliente">
+					<p:dataTable value="#{Historial.lista}" var="c" scrollable="true"
+						scrollHeight="150">
+
+						<f:facet name="header">
+							<p:outputLabel value="Consultar Cliente" />
+						</f:facet>
+						<p:column headerText="Primer Nombre" style="font-weight:bold">
+							<p:outputLabel value="#{c.nombre1}" style="font-weight:bold" />
+						</p:column>
+
+						<p:column headerText="Segundo Nombre" style="font-weight:bold">
+							<p:outputLabel value="#{c.nombre2}" style="font-weight:bold" />
+						</p:column>
+
+						<p:column headerText="Apellido Paterno" style="font-weight:bold">
+							<p:outputLabel value="#{c.apellidop}" style="font-weight:bold" />
+						</p:column>
+
+						<p:column headerText="Apellido Materno" style="font-weight:bold">
+							<p:outputLabel value="#{c.apellidom}" style="font-weight:bold" />
+						</p:column>
+
+						<p:column headerText="DNI" style="font-weight:bold">
+							<p:outputLabel value="#{c.dni}" style="font-weight:bold" />
+						</p:column>
+
+						<p:column headerText="Fecha de Nacimiento"
+							style="font-weight:bold">
+							<p:outputLabel value="#{c.fechaNacimiento}">
+								<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+							</p:outputLabel>
+						</p:column>
+
+						<p:column headerText="Fecha de Registro" style="font-weight:bold">
+							<p:outputLabel value="#{c.fechaRegistro}">
+								<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+							</p:outputLabel>
+						</p:column>
+
+						<p:column id="txtid" style="width:32px;text-align: center">
+
+							<p:commandLink id="btmbuscar"
+								onclick="PF('dialogCliente').hide();"
+								actionListener="#{Historial.listar}" icon="ui-icon-search"
+								update=":frmDetalle:pnlBuscarCliente,frmDetalle:panelLista,:frmDetalle:growl">
+								<f:attribute name="xid" value="#{c.idCliente}" />
+								<p:graphicImage value="/util/images/icons/Select01.png" width="8px"
+							style="float:center;width:25px" />
+							</p:commandLink>
+
+
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+			</h:form>
+		</p:dialog>
+
+
+	</ui:define>
+
+</ui:composition>

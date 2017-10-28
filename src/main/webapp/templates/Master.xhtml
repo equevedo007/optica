@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view contentType="text/html">
+	<h:head>
+
+		<link type="text/css" rel="stylesheet"
+			href="#{request.contextPath}/css/default.css" />
+
+		<link type="text/css" rel="stylesheet"
+			href="#{request.contextPath}/css/syntaxhighlighter/syntaxhighlighter.css" />
+		<f:facet name="first">
+			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+
+			<meta http-equiv="Pragma" content="No-cache" />
+			<meta http-equiv="Cache-Control"
+				content="no-store,No-cache,must-revalidate,post-check=0,pre-check=0,max-age=0" />
+			<meta http-equiv="Expires" content="-1" />
+			<title>Corporosoft</title>
+		</f:facet>
+		<link href="#{request.contextPath}/util/css/estilos.css"
+			rel="stylesheet" type="text/css" />
+		<link href="#{request.contextPath}/util/images/icon/logo_sat.ico"
+			type="image/x-icon" rel="shortcut icon" />
+
+		
+		<f:event listener="#{sessionManaged.verificarSession}" type="preRenderView"></f:event>
+	</h:head>
+
+	<h:body>
+
+		<p:layout fullPage="true" collapseTitle="Minimizar"
+			expandTitle="Maximizar" resizable="false">
+
+			<p:layoutUnit position="north" size="70" resizable="false"
+				closable="false" collapsible="false">
+				<ui:insert name="header">
+					<ui:include src="cabecera.xhtml" />
+				</ui:insert>
+			</p:layoutUnit>
+			
+			<p:layoutUnit position="south" size="70" resizable="false"
+				closable="false" collapsible="false">
+				<ui:insert name="header">
+					<ui:include src="pie.xhtml" />
+				</ui:insert>
+			</p:layoutUnit>
+
+
+
+			<p:layoutUnit position="west" size="186" header="Menu Principal"
+				resizable="false" closable="false" collapsible="true" effect="drop">
+				<ui:insert name="menu">
+					<ui:include src="menu.xhtml" />
+				</ui:insert>
+
+			</p:layoutUnit>
+
+			<p:layoutUnit position="center" fullPage="true"
+				collapseTitle="Minimizar" expandTitle="Maximizar">
+				<ui:insert name="contenido">Content</ui:insert>
+			</p:layoutUnit>
+
+		</p:layout>
+		
+		<p:growl id="listaMensajes" showDetail="true" showSummary="false"
+			globalOnly="true" life="9000" />
+
+		
+
+	</h:body>
+
+</f:view>
+</html>
+

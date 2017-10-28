@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/Master.xhtml"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<ui:define name="contenido">
+
+		<h:form id="frmProducto">
+			<p:panel id="panelProveedor" header="Registar Producto">
+			
+				<p:panelGrid columns="3" cellpadding="5"> 
+				
+				<p:outputLabel value="Seleccione un Proveedor :*"
+						style="font-weight:bold" />
+					<p:inputText id="txtRazonSocial" value="#{ProductoManaged.objProveedor.razon_Social}" disabled="true"
+						style="width:260px" />
+					<p:commandLink onclick="PF('dialogProveedor').show();">
+						<p:graphicImage value="/util/images/icons/buscar.png" width="10px"
+							style="float:center;width:30px" />
+					</p:commandLink>
+				</p:panelGrid>
+
+				<p:panelGrid columns="2" cellpadding="5">
+
+					<p:outputLabel value="Tipo de Producto:*" style="font-weight:bold" />
+					<p:selectOneMenu value="#{ProductoManaged.idTipoProducto}">
+						<f:selectItem itemLabel="-Seleccione-" itemValue="" />
+						<f:selectItems value="#{ProductoManaged.listaTipo}" var="t"
+							itemLabel="#{t.descripcion}" itemValue="#{t.idTipo_producto}" />
+					</p:selectOneMenu>
+				
+				
+					<p:outputLabel value="Marca:*"/>
+					<p:inputText value="#{ProductoManaged.objProducto.marca}"/>
+					
+					<p:outputLabel value="Precio:*"/>
+					<p:inputText value="#{ProductoManaged.objProducto.precio}"/>
+					
+					<p:outputLabel value="Cantidad:*"/>
+					<p:inputText value="#{ProductoManaged.objProducto.cantidad}"/>
+					
+					<p:outputLabel value="Descripción:*"/>
+					<p:inputText value="#{ProductoManaged.objProducto.descripcion}"/>
+				</p:panelGrid>
+
+
+
+			</p:panel>
+			<p:commandButton value="Registar Producto"
+				actionListener="#{ProductoManaged.Registar}" />
+		</h:form>
+
+		<p:dialog widgetVar="dialogProveedor" modal="true"
+			showEffect="explode" hideEffect="explode" resizable="false"
+			appendTo="@(body)" width="1024px">
+			<h:form id="frmDialogoProveedor">
+				<p:panel id="panelProveedor" header="Buscar de Proveedor">
+					<p:panelGrid columns="6">
+						<p:outputLabel value="Ingrese la Razón Social :*"
+							style="font-weight:bold" />
+						<p:inputText value="#{ProductoManaged.razonSocial}"
+							style="width:260px" />
+						<p:outputLabel value="Ingrese el RUC/RUS:*"
+							style="font-weight:bold" />
+						<p:inputText value="#{ProductoManaged.ruc}" />
+						<p:commandButton
+							actionListener="#{ProductoManaged.BuscarProveedor}"
+							value="Buscar" update="tablaProveedor">
+						</p:commandButton>
+					</p:panelGrid>
+				</p:panel>
+
+				<p:panel id="tablaProveedor">
+					<p:dataTable value="#{ProductoManaged.listaProveedor}"
+						scrollable="true" scrollHeight="150" var="p">
+
+
+
+						<p:column headerText="Razón Social">
+							<p:outputLabel value="#{p.razon_Social}" />
+						</p:column>
+
+						<p:column headerText="Nombre Comercial">
+							<p:outputLabel value="#{p.nombre_Comercial}" />
+						</p:column>
+
+						<p:column headerText="RUC/RUS" style="width:90px;text-align: center">
+							<p:outputLabel value="#{p.ruc}" />
+						</p:column>
+
+						
+
+						<p:column headerText="Seleccionar" style="width:65px;text-align: center">
+							<p:commandLink id="btmbuscar"
+							onclick="PF('dialogProveedor').hide();"
+								actionListener="#{ProductoManaged.buscarProveedorID}"
+								icon="ui-icon-search" update=":frmProducto:panelProveedor">
+								<f:attribute name="idProveedor" value="#{p.idProveedor}" />
+								<p:graphicImage value="/util/images/icons/Select01.png"
+									width="8px" style="float:center;width:25px" />
+							</p:commandLink>
+						</p:column>
+
+					</p:dataTable>
+
+				</p:panel>
+			</h:form>
+		</p:dialog>
+
+
+	</ui:define>
+
+</ui:composition>

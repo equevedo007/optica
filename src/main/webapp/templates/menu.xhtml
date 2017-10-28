@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: ADELGADO
+  Date: 5/06/12
+  Time: 17:40
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:form id="frmMenu">
+		<p:panelMenu style="width: 172px; font-size: smaller;">
+
+
+
+
+			<p:submenu label="Clientes" style="width: 170px;">
+
+				<p:menuitem value="Registrar Cliente" action="registrarCliente"
+					icon="ui-icon-newwin" ajax="false" />
+
+				<p:menuitem value="Consultar Cliente" action="consultarCliente"
+					ajax="false" icon="ui-icon-newwin" />
+
+				<p:menuitem value="Mantenimiento de Clientes"
+					action="mantenimientoCliente" ajax="false" icon="ui-icon-newwin" />
+			</p:submenu>
+
+			<p:submenu label="Optometras" style="width: 170px;">
+			
+				<p:menuitem value="Registrar Optometra"
+					action="registrarOptometra" icon="ui-icon-newwin"
+					ajax="false" />
+				<p:menuitem value="Consultar Optometra"
+					action="consultarOptometra" icon="ui-icon-newwin"
+					ajax="false" />
+				<p:menuitem value="Mantenimiento de Optometra"
+					action="mantenimientoOptometra" icon="ui-icon-newwin"
+					ajax="false" />	
+				
+			</p:submenu>
+
+			<p:submenu label="Historial Óptico" style="width: 170px;">
+				<p:menuitem value="Crear Historial Óptico"
+					url="/ui/historial/generarHistoria.xhtml" icon="ui-icon-newwin"
+					ajax="false" />
+
+				<p:menuitem value="Consultar Historia"
+					url="/ui/historial/consultarHistoria.xhtml" icon="ui-icon-newwin"
+					ajax="false" />
+			</p:submenu>
+			
+			<p:submenu label="Ventas" style="width: 170px;">
+				<p:menuitem value="Realizar Venta"
+					action="RealizarVenta"
+					 icon="ui-icon-newwin" ajax="false" />
+
+
+			</p:submenu>
+			
+			<p:submenu label="Reporte" style="width: 170px;">
+			
+				<p:menuitem value="Próximo Control de Pacientes"
+					action="reporteProximoControl"
+					icon="ui-icon-newwin" ajax="false" />
+			
+			<p:menuitem value="Historias Registradas"
+					action="ReportedeHistorias"
+					icon="ui-icon-newwin" ajax="false" />		
+			</p:submenu>
+
+		</p:panelMenu>
+
+	</h:form>
+
+</f:view>
